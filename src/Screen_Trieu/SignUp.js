@@ -5,29 +5,28 @@ import {
   Image,
   StyleSheet,
   TextInput,
-  Pressable,
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
 
-const Login = props => {
+const SignUp = props => {
   const {navigation} = props;
   const goBack = () => {
     navigation.goBack();
   };
-  const goToSignUp = () => {
-    navigation.navigate('SignUp');
+  const goToLogin = () => {
+    navigation.navigate('Login');
   };
   return (
     <View style={Styles.container}>
       <View style={Styles.back}>
-      <TouchableOpacity>
-      <Image
-          onPress={goBack}
-          source={require('../Image_Trieu/back.jpg')}
-          style={Styles.imgBack}
-        />
-      </TouchableOpacity>
+        <TouchableOpacity>
+          <Image
+            onPress={goBack}
+            source={require('../Image_Trieu/back.jpg')}
+            style={Styles.imgBack}
+          />
+        </TouchableOpacity>
       </View>
       <View style={Styles.loginIns}>
         <Image
@@ -41,30 +40,25 @@ const Login = props => {
       <View style={Styles.txtLogin}>
         <TextInput placeholder="Password" style={Styles.txtPass} />
       </View>
-      <View>
-        <Text style={Styles.txtForgot}>Forgot password?</Text>
+      <View style={Styles.txtLogin}>
+        <TextInput
+          placeholder="Confirm Password"
+          style={Styles.txtConfirmpass}
+        />
       </View>
       <View style={Styles.btn}>
-        <TouchableOpacity style={Styles.btnLogin} onPress={goToSignUp}>
-          <Text style={Styles.txtLogin1}>LOGIN</Text>
+        <TouchableOpacity style={Styles.btnLogin} onPress={goToLogin}>
+          <Text style={Styles.txtLogin1}>SIGN UP</Text>
         </TouchableOpacity>
       </View>
-      <View style={Styles.howFb}>
-        <Image style={Styles.imgFb} source={require('../Image_Trieu/fb.png')} />
-        <Text style={Styles.txtLogin}>Login with FaceBook</Text>
-      </View>
-      <View style={Styles.growth}>
-        <View style={Styles.row1} />
-        <Text style={Styles.txtOr}>Or</Text>
-        <View style={Styles.row1} />
-      </View>
       <View style={Styles.footer}>
-        <Text style={Styles.txtFooter1}>Don’t have an account?</Text>
-        <TouchableOpacity onPress={goToSignUp}>
-          <Text style={Styles.txtFooter2}>Sign up.</Text>
+        <Text style={Styles.txtFooter1}>You have an account?</Text>
+        <TouchableOpacity style={Styles.txtFooter2} onPress={goToLogin}>
+          <Text>Login.</Text>
         </TouchableOpacity>
       </View>
       <View style={Styles.footerEnd}>
+        <View style={Styles.row2}></View>
         <View style={Styles.row2}></View>
         <Text style={Styles.txtEndins}>Instagram from Team 7</Text>
         <View style={Styles.row3}></View>
@@ -73,7 +67,7 @@ const Login = props => {
   );
 };
 
-export default Login;
+export default SignUp;
 const Styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -121,18 +115,17 @@ const Styles = StyleSheet.create({
     marginRight: 16,
     padding: 13.5,
   },
-  txtForgot: {
-    fontFamily: 'Poppins',
-    fontStyle: 'normal',
-    fontWeight: '500',
-    fontSize: 12,
-    color: '#3797EF',
-    textAlign: 'right',
-    letterSpacing: 0.15,
-    lineHeight: 18,
+  txtConfirmpass: {
+    backgroundColor: ' #FAFAFA',
+    borderRadius: 5,
+    borderWidth: 0.5,
+    borderStyle: 'solid',
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+    marginTop: 12,
+    marginLeft: 16,
     marginRight: 16,
-    marginTop: 19,
-    marginBottom: 45,
+    padding: 13.5,
+    marginBottom: 40,
   },
   txtLogin1: {
     textAlign: 'center',
@@ -163,39 +156,6 @@ const Styles = StyleSheet.create({
     backgroundColor: '#3797EF',
     borderRadius: 5,
   },
-  howFb: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    position: 'relative',
-    top: 60,
-  },
-  imgFb: {width: 17, height: 17, marginRight: 3},
-  txtLogin: {color: '#3797EF', fontWeight: '900', fontSize: 14},
-  growth: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginLeft: 16,
-    position: 'relative',
-    top: 78.5,
-  },
-  row1: {
-    width: 132,
-    height: 1,
-    backgroundColor: '#676060',
-  },
-  txtOr: {
-    position: 'absolute',
-    height: 18,
-    left: '47.6%',
-    right: '47.6%',
-    top: -7,
-    fontFamily: 'Poppins',
-    fontStyle: 'normal',
-    fontWeight: '900',
-    fontSize: 12,
-    lineHeight: 18,
-    color: '#676060',
-  },
   footer: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -209,13 +169,16 @@ const Styles = StyleSheet.create({
 
     textAlign: 'center',
     letterSpacing: -0.15,
-
+    marginBottom: 70,
     color: '#676060',
   },
   txtFooter1: {},
   txtFooter2: {color: '#3797EF'},
-  footerEnd: {flexDirection: 'column'},
-  row2: {width: 395, backgroundColor: '#676060', height: 1, marginTop: 100},
+
+  txtFooter1: {},
+  txtFooter2: {color: '#3797EF'},
+  footerEnd: {flexDirection: 'column', position: 'relative', top: 10},
+  row2: {width: 395, backgroundColor: '#676060', height: 1, marginTop: 9},
   txtEndins: {textAlign: 'center', marginTop: 32.5},
   row3: {
     // position: 'absolute',
