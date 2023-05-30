@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image, StatusBar, TextInput } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Image, StatusBar, TextInput,KeyboardAvoidingView, Dimensions } from 'react-native'
 import React from 'react'
 
 const Login = (props) => {
@@ -9,24 +9,28 @@ const Login = (props) => {
     const goToSignUp = () => {
         navigation.navigate('SignUp');
       }
+      const goToHome = () => {
+        navigation.navigate('HomeTab');
+      }
     return (
+
         <View style={styles.container}>
             <StatusBar
                 barStyle={'dark-content'}
                 translucent={true}
                 backgroundColor={'transparent'}
             ></StatusBar>
-            <View style={{ flex: 1 }}>
+            <View style={{ flex:1 }}>
                 <TouchableOpacity onPress={goBack}>
                     <Image style={styles.btnBack} source={require('../image_Khoi/Back.png')}></Image>
                 </TouchableOpacity>
                 <Image style={styles.logo} source={require('../image_Khoi/Instagram_Logo.png')}></Image>
-                <TextInput style={styles.textInput} placeholder='Username'></TextInput>
-                <TextInput secureTextEntry={true} style={[styles.textInput, { marginTop: 12 }]} placeholder='Password'></TextInput>
+                <TextInput style={styles.textInput} placeholder='Username' placeholderTextColor={'#67606070'}></TextInput>
+                <TextInput secureTextEntry={true} style={[styles.textInput, { marginTop: 12 }]} placeholder='Password' placeholderTextColor={'#67606070'}></TextInput>
                 <TouchableOpacity style={styles.btnForgotPass}>
                     <Text style={styles.forgotText}>Forgot password?</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.btnLogin}>
+                <TouchableOpacity style={styles.btnLogin} onPress={goToHome}>
                     <Text style={styles.loginText}>Log in</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.fbLoginView}>
@@ -43,9 +47,12 @@ const Login = (props) => {
 
             </View>
             <View style={styles.bottomView}>
-                <Text style={styles.noAccText}>Instagram is dev by Khoi</Text>
+                <Text style={styles.noAccText}>Instagram dev by Khoi</Text>
             </View>
         </View>
+
+
+       
     )
 }
 
@@ -54,7 +61,7 @@ export default Login
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#FFFFFF',
-        flex: 1
+        flex:1
     },
     btnBack: {
         marginTop: 56,
@@ -72,7 +79,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         backgroundColor: '#FAFAFA',
         borderWidth: 1,
-        borderColor: '#0000001A'
+        borderColor: '#0000001A',
+        color:'#676060'
     },
     btnForgotPass: {
         marginTop: 19,
@@ -81,7 +89,7 @@ const styles = StyleSheet.create({
     },
     forgotText: {
         fontFamily: 'Poppins',
-        fontSize: 12,
+        fontSize: 14,
         fontWeight: '500',
         color: '#3797EF',
     },
@@ -97,7 +105,7 @@ const styles = StyleSheet.create({
     },
     loginText: {
         fontFamily: 'Poppins',
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: '900',
         color: '#FFFFFF',
     },
@@ -105,6 +113,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignSelf: 'center',
         marginTop: 30,
+        justifyContent:'center',
+        alignItems:'center'
     },
     fbText: {
         fontFamily: 'Poppins',
@@ -146,6 +156,8 @@ const styles = StyleSheet.create({
         borderColor: '#00000010',
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        
     },
+ 
 })

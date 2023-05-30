@@ -21,9 +21,9 @@ const SignUp = (props) => {
                     <Image style={styles.btnBack} source={require('../image_Khoi/Back.png')}></Image>
                 </TouchableOpacity>
                 <Image style={styles.logo} source={require('../image_Khoi/Instagram_Logo.png')}></Image>
-                <TextInput style={styles.textInput} placeholder='Username'></TextInput>
-                <TextInput secureTextEntry={true} style={[styles.textInput, { marginTop: 12 }]} placeholder='Password'></TextInput>
-                <TextInput secureTextEntry={true} style={[styles.textInput, { marginTop: 12 }]} placeholder='Confirm Password'></TextInput>
+                <TextInput style={styles.textInput} placeholder='Username' placeholderTextColor={'#67606070'}></TextInput>
+                <TextInput secureTextEntry={true} style={[styles.textInput, { marginTop: 12 }]} placeholder='Password' placeholderTextColor={'#67606070'}></TextInput>
+                <TextInput secureTextEntry={true} style={[styles.textInput, { marginTop: 12 }]} placeholder='Confirm Password' placeholderTextColor={'#67606070'}></TextInput>
                 <TouchableOpacity style={styles.btnLogin}>
                     <Text style={styles.loginText}>Sign Up</Text>
                 </TouchableOpacity>
@@ -36,7 +36,7 @@ const SignUp = (props) => {
 
             </View>
             <View style={styles.bottomView}>
-                <Text style={styles.noAccText}>Instagram is dev by Khoi</Text>
+                <Text style={styles.noAccText}>Instagram dev by Khoi</Text>
             </View>
         </View>
   )
@@ -65,7 +65,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         backgroundColor: '#FAFAFA',
         borderWidth: 1,
-        borderColor: '#0000001A'
+        borderColor: '#0000001A',
+        color:'#676060'
     },
     btnLogin: {
         width: 343,
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
     },
     loginText: {
         fontFamily: 'Poppins',
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: '900',
         color: '#FFFFFF',
     },
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
     },
     signUpText: {
         fontFamily: 'Poppins',
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: '700',
         color: '#3797EF',
     },

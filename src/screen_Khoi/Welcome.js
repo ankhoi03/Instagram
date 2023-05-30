@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     },
     loginText: {
         fontFamily: 'Poppins',
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: '900',
         color: '#FFFFFF',
     },
@@ -74,13 +74,13 @@ const styles = StyleSheet.create({
     },
     noAccText:{
         fontFamily: 'Poppins',
-        fontSize: 12,
+        fontSize: 14,
         fontWeight: '400',
         color: '#676060',
     },
     signUpText:{
         fontFamily: 'Poppins',
-        fontSize: 12,
+        fontSize: 14,
         fontWeight: '900',
         color: '#3797EF',
     }
