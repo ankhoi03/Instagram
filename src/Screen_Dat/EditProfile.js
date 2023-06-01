@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 
 const EditProfile = () => {
   const [text, setText] = useState('');
-
   const handleTextChange = (inputText) => {
     setText(inputText);
   };
@@ -135,7 +134,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     backgroundColor: '#ffffff',
-    marginTop:10
+    marginTop: 10
   },
 
   viewtitle: {

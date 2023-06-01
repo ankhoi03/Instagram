@@ -9,7 +9,7 @@ import {
 import React from 'react';
 
 const Login = props => {
-  const {navigation} = props;
+  const { navigation } = props;
   const goto = () => {
     navigation.navigate('Signtup');
   };
@@ -19,7 +19,7 @@ const Login = props => {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={goto2}>
-        <View style={{padding: 24}}>
+        <View style={{ padding: 24 }}>
           <Image source={require('../Image_Dat/Back.png')} />
         </View>
       </TouchableOpacity>
@@ -27,7 +27,7 @@ const Login = props => {
       <View style={styles.viewlogo}>
         <Image source={require('../Image_Dat/Text_Instagram.png')} />
       </View>
-      <View style={{marginTop: 39, padding: 24}}>
+      <View style={{ marginTop: 39, padding: 24 }}>
         <TextInput style={styles.textInput} placeholder="Username" />
         <TextInput
           style={styles.textInput}
@@ -35,7 +35,7 @@ const Login = props => {
           secureTextEntry
         />
       </View>
-      <TouchableOpacity style={{marginTop: 1}}>
+      <TouchableOpacity style={{ marginTop: 1 }}>
         <Text
           style={{
             fontSize: 15,
@@ -79,12 +79,12 @@ const Login = props => {
           flexDirection: 'row',
           justifyContent: 'center',
         }}>
-        <Text style={{borderBottomWidth: 1}}>.....................</Text>
-        <Text style={{color: '#676060', fontSize: 18}}>or</Text>
-        <Text style={{borderBottomWidth: 1}}>.....................</Text>
+        <Text style={{ borderBottomWidth: 1 }}>.....................</Text>
+        <Text style={{ color: '#676060', fontSize: 18 }}>or</Text>
+        <Text style={{ borderBottomWidth: 1 }}>.....................</Text>
       </View>
       <View style={styles.Textsignt}>
-        <Text style={{color: '#676060', fontSize: 15, marginTop: 20}}>
+        <Text style={{ color: '#676060', fontSize: 15, marginTop: 20 }}>
           Don't have an account?
         </Text>
         <Text
@@ -118,7 +118,7 @@ export default Login;
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
   },
   viewlogo: {
     alignItems: 'center',

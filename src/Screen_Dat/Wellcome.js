@@ -9,7 +9,7 @@ import {
 import React from 'react';
 
 const Wellcome = props => {
-  const {navigation} = props;
+  const { navigation } = props;
   const goto = () => {
     navigation.navigate('Login');
   };
@@ -26,14 +26,14 @@ const Wellcome = props => {
         <Image source={require('../Image_Dat/Text_Instagram.png')} />
       </View>
       <TouchableOpacity style={styles.btnLogin}>
-        <Text style={styles.btnLoginLabel} 
-        onPress={goto}>Login</Text>
+        <Text style={styles.btnLoginLabel}
+          onPress={goto}>Login</Text>
       </TouchableOpacity>
       <View style={styles.bottomText}>
-        <Text style={{color: '#676060',fontSize: 15,marginTop: 10,fontWeight: 'bold',}}>Don't have an account?
+        <Text style={{ color: '#676060', fontSize: 15, marginTop: 10, fontWeight: 'bold', }}>Don't have an account?
         </Text>
-        <Text style={{color: '#3797EF',fontSize: 15,marginTop: 10,marginStart: 5,fontWeight: 'bold',}}
-        onPress={goto2}>Signt up.</Text>
+        <Text style={{ color: '#3797EF', fontSize: 15, marginTop: 10, marginStart: 5, fontWeight: 'bold', }}
+          onPress={goto2}>Signt up.</Text>
       </View>
     </View>
   );

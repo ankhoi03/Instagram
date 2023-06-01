@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import React from 'react';
 import ItemSearchUser from '../Component_Dat/ItemSearchUser';
-import { FlatListComponent } from 'react-native';
 
 const data = [
   {
@@ -82,15 +81,14 @@ const SearchAcount = () => {
         barStyle={'dark-content'}
         translucent={true}
         backgroundColor={'transparent'}></StatusBar>
-      <View style={{flexDirection: 'row', alignItems: 'center', padding: 24}}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', padding: 24 }}>
         <TouchableOpacity>
           <Image source={require('../Image_Dat/Back.png')} />
         </TouchableOpacity>
         <View style={styles.searchView}>
           <Image
-            style={{width: 20, height: 20}}
-            source={require('../Image_Dat/Search.png')}
-          />
+            style={{ width: 20, height: 20 }}
+            source={require('../Image_Dat/Search.png')} />
           <TextInput
             style={styles.textInput}
             placeholder="Search"
@@ -102,13 +100,12 @@ const SearchAcount = () => {
         </View>
       </View>
       <View>
-       <FlatList
-        data={data}
-        renderItem={({item})=><ItemSearchUser data = {item}/>} 
-        keyExtractor={item => item.id}
-      />
+        <FlatList
+          data={data}
+          renderItem={({ item }) => <ItemSearchUser data={item} />}
+          keyExtractor={item => item.id}
+        />
       </View>
-      
     </View>
   );
 };
@@ -119,7 +116,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
-    paddingTop:30,
+    paddingTop: 30,
   },
   searchView: {
     width: 330,
@@ -130,7 +127,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     backgroundColor: '#BBBBC3',
-
     marginStart: 10,
   },
   textInput: {

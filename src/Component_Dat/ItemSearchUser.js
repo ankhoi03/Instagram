@@ -29,6 +29,8 @@ const ItemSearchUser = props => {
               {data.name}
             </Text>
             <Text style={{color: '#A3A3A3'}}>{data.title}</Text>
+
+            
           </View>
         </View>
       </TouchableOpacity>

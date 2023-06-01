@@ -108,14 +108,14 @@ const SearchPicks = () => {
           <Image source={require('../Image_Dat/Back.png')} />
         </TouchableOpacity>
 
-        <Text style={{fontWeight: '900', fontSize: 16}}>All post</Text>
+        <Text style={{ fontWeight: '900', fontSize: 16 }}>All post</Text>
         <View></View>
       </View>
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <FlatList
           data={data}
           numColumns={3}
-          renderItem={({item}) => <ItemSearchPicks data={item} />}
+          renderItem={({ item }) => <ItemSearchPicks data={item} />}
           keyExtractor={item => item.id}
         />
       </View>

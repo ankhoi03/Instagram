@@ -12,6 +12,10 @@ import Notification from './src/Screen_Dat/Notification'
 import ItemNotification from './src/Component_Dat/ItemNotification'
 import ItemStory from './src/Component_Dat/ItemStory'
 import EditProfile from './src/Screen_Dat/EditProfile'
+import Search from './src/Screen_Dat/Search'
+import ItemSearch from './src/Component_Dat/ItemSearch'
+import Post from './src/Screen_Dat/Post'
+
 
 
 
@@ -27,13 +31,12 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <EditProfile />
+    <Post/>
     // <NavigationContainer>
     //     <Stack.Navigator screenOptions={{headerShown: false}}>
     //       <Stack.Screen name="Wellcome" component={Wellcome} />
     //       <Stack.Screen name="Login" component={Login} />
     //       <Stack.Screen name="Signtup" component={Signtup} />
-
     //     </Stack.Navigator>
     //   </NavigationContainer>
   )
