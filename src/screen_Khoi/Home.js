@@ -6,11 +6,6 @@ import ItemStory from '../component_Khoi/ItemStory'
 const Home = () => {
   return (
     <View style={styles.container}>
-      <StatusBar barStyle={'dark-content'}
-        translucent={true}
-        backgroundColor={'transparent'}
-      />
-
       <View style={styles.headerView}>
         <Image source={require("../image_Khoi/InsLogo_mini.png")}></Image>
         <TouchableOpacity>
@@ -43,7 +38,7 @@ const styles = StyleSheet.create({
 
   },
   headerView: {
-    marginTop: 44,
+    marginTop: 16,
     paddingHorizontal: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',

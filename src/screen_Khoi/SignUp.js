@@ -11,11 +11,6 @@ const SignUp = (props) => {
       }
   return (
     <View style={styles.container}>
-            <StatusBar
-                barStyle={'dark-content'}
-                translucent={true}
-                backgroundColor={'transparent'}
-            ></StatusBar>
             <View style={{ flex: 1 }}>
                 <TouchableOpacity onPress={goBack}>
                     <Image style={styles.btnBack} source={require('../image_Khoi/Back.png')}></Image>
@@ -50,7 +45,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     btnBack: {
-        marginTop: 56,
+        marginTop: 32,
         marginStart: 16
     },
     logo: {

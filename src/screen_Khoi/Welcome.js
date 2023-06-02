@@ -11,12 +11,6 @@ const Welcome = (props) => {
       }
     return (
         <View style={styles.container}>
-
-            <StatusBar
-                barStyle={'dark-content'}
-                translucent={true}
-                backgroundColor={'transparent'}
-            ></StatusBar>
             <View style={{flex:1}}>
                 <Image style={styles.logo} source={require('../image_Khoi/Instagram_Logo.png')}></Image>
                 <TouchableOpacity style={styles.btnLogin} onPress={goToLogin}>
@@ -45,7 +39,7 @@ const styles = StyleSheet.create({
     },
     logo: {
         alignSelf: 'center',
-        marginTop: 240
+        marginTop: 200
     },
     btnLogin: {
         width: 307,

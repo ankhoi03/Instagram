@@ -1,11 +1,17 @@
-import { StyleSheet, Text, View, StatusBar, Image, TouchableOpacity, Dimensions } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, StatusBar, Image, TouchableOpacity, Dimensions, ScrollView, ToastAndroid } from 'react-native'
+import React, { useRef,useState } from 'react'
 
 import MyPostTab from '../component_Khoi/MyPostTab';
 import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
 import MyBookmarkTab from '../component_Khoi/MyBookmarkTab';
+import Modal from "react-native-modal";
 
 const Profile = () => {
+
+    const [visible, setvisible] = useState(false);
+    const inBeta = () => {
+        ToastAndroid.show('Tính năng đang phát triển', ToastAndroid.SHORT);
+    }
 
     const MyPostRoute = () => (
         <MyPostTab />
@@ -20,39 +26,36 @@ const Profile = () => {
     });
     const [index, setIndex] = React.useState(0);
     const [routes] = React.useState([
-        { key: 'mypost',image: require('../image_Khoi/MyPost.png') },
+        { key: 'mypost', image: require('../image_Khoi/MyPost.png') },
         { key: 'mybookmark', image: require('../image_Khoi/Bookmark.png') },
 
     ]);
     const CustomTabBarImage = ({ source, focused }) => {
         return (
-          <Image source={source} style={{ width: 24, height: 24, tintColor: focused ? '#000000' : '#00000040' }} />
+            <Image source={source} style={{ width: 24, height: 24, tintColor: focused ? '#000000' : '#00000040' }} />
         );
-      };
+    };
     const renderTabBar = props => (
         <TabBar
             {...props}
-            indicatorStyle={{backgroundColor:'#262626'}}
-            style={{ backgroundColor: 'transparent'}}
-            indicatorContainerStyle={{borderTopWidth:1, borderColor: '#0000008A'}}
+            indicatorStyle={{ backgroundColor: '#262626' }}
+            style={{ backgroundColor: 'transparent' }}
+            indicatorContainerStyle={{ borderTopWidth: 1, borderColor: '#0000008A' }}
             renderIcon={({ route, focused }) => (
                 <CustomTabBarImage source={route.image} focused={focused} />
-              )}
+            )}
             pressColor='transparent'
         />
     );
     return (
+
         <View style={styles.container}>
-            <StatusBar barStyle={'dark-content'}
-                translucent={true}
-                backgroundColor={'transparent'}
-            />
             <View style={styles.headerView}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={styles.username}>tmy_dthuong</Text>
-                    <Image style={{width:15,height:15, marginTop:5}} source={require('../image_Khoi/official_icon.png')}></Image>
+                    <Image style={{ width: 15, height: 15, marginTop: 5 }} source={require('../image_Khoi/official_icon.png')}></Image>
                 </View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>setvisible(true)}>
                     <Image source={require('../image_Khoi/Menu.png')}></Image>
                 </TouchableOpacity>
             </View>
@@ -73,7 +76,7 @@ const Profile = () => {
                 </TouchableOpacity>
             </View>
             <Text style={styles.name}>Mỹ Nguyễn</Text>
-            <Text numberOfLines={2} style={styles.gtText}>Mot bong hong xinh tuoi tham huhh trong em kieu sa</Text>
+            <Text numberOfLines={2} style={styles.gtText}>Mot bong hong xinh tuoi tham</Text>
             <TouchableOpacity style={styles.btnEdit}>
                 <Text style={styles.editprofileText}>Edit Profile</Text>
             </TouchableOpacity>
@@ -86,6 +89,44 @@ const Profile = () => {
 
                 />
             </View>
+
+            <Modal
+                style={{ width: '100%', marginLeft: 0, marginRight: 0}}
+                isVisible={visible} onBackdropPress={()=>setvisible(false)}
+                onBackButtonPress={()=>setvisible(false)}
+                
+            >
+                <View style={styles.optionView}>
+                    <View style={{ padding: 20 }}>
+
+
+                        <TouchableOpacity onPress={inBeta} style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
+                            <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/setting.png')} />
+                            <Text style={styles.optionText} >Setting</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={inBeta} style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
+                            <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/your_act.png')} />
+                            <Text style={styles.optionText} >Your activity</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
+                            <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/change_pass.png')} />
+                            <Text style={styles.optionText} >Change Password</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
+                            <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/logout.png')} />
+                            <Text style={styles.optionText} >Log out</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.bottomView}>
+                        <Image source={require("../image_Khoi/Instagram_Logo.png")}></Image>
+                        <Text style={styles.optionText}>Dev by Khoi</Text>
+                    </View>
+
+                </View>
+
+
+            </Modal>
+          
         </View>
 
 
@@ -98,10 +139,9 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#FFFFFF',
         flex: 1
-
     },
     headerView: {
-        marginTop: 44,
+        marginTop: 16,
         paddingHorizontal: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -121,8 +161,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 20,
         paddingHorizontal: 20
-
-
     },
     profileText: {
         fontFamily: 'Poppins',
@@ -191,6 +229,33 @@ const styles = StyleSheet.create({
         marginTop: 20,
         flex: 1,
     },
-  
+    optionText: {
+        fontFamily: 'Poppins',
+        fontSize: 18,
+        fontWeight: '600',
+        color: 'black',
+        marginStart: 10,
+    },
+    bottomView: {
+        borderTopWidth: 1,
+        borderColor: 'black',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 20
+    },
+    optionView: {
+        position: 'absolute',
+        bottom: -20,
+        right: 0,
+        left: 0,
+        height: 350,
+        width: '100%',
+        backgroundColor: '#fff'
+
+    },
+    btsImg: {
+        width: 24,
+        height: 24
+    }
 
 })
