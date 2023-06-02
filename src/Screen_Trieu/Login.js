@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TextInput,
   Pressable,
+  StatusBar,
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
@@ -18,8 +19,15 @@ const Login = props => {
   const goToSignUp = () => {
     navigation.navigate('SignUp');
   };
+  const goToForgot = () => {
+    navigation.navigate('Forgot');
+  };
   return (
     <View style={Styles.container}>
+      <StatusBar barStyle={'dark-content'}
+                translucent={true}
+                backgroundColor={'transparent'}
+            />
       <View style={Styles.back}>
       <TouchableOpacity>
       <Image
@@ -42,7 +50,9 @@ const Login = props => {
         <TextInput placeholder="Password" style={Styles.txtPass} />
       </View>
       <View>
-        <Text style={Styles.txtForgot}>Forgot password?</Text>
+        <TouchableOpacity>
+        <Text style={Styles.txtForgot}onPress={goToForgot}>Forgot password?</Text>
+        </TouchableOpacity>
       </View>
       <View style={Styles.btn}>
         <TouchableOpacity style={Styles.btnLogin} onPress={goToSignUp}>
@@ -83,7 +93,7 @@ const Styles = StyleSheet.create({
     width: 9.38,
     height: 17.47,
     color: '#000',
-    marginTop: 56,
+    marginTop: 44,
     marginLeft: 16.41,
     position: 'absolute',
     backgroundColor: '#262626',

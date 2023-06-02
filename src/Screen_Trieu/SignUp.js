@@ -5,6 +5,7 @@ import {
   Image,
   StyleSheet,
   TextInput,
+  StatusBar,
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
@@ -19,6 +20,10 @@ const SignUp = props => {
   };
   return (
     <View style={Styles.container}>
+      <StatusBar barStyle={'dark-content'}
+                translucent={true}
+                backgroundColor={'transparent'}
+            />
       <View style={Styles.back}>
         <TouchableOpacity>
           <Image
@@ -53,8 +58,8 @@ const SignUp = props => {
       </View>
       <View style={Styles.footer}>
         <Text style={Styles.txtFooter1}>You have an account?</Text>
-        <TouchableOpacity style={Styles.txtFooter2} onPress={goToLogin}>
-          <Text>Login.</Text>
+        <TouchableOpacity  onPress={goToLogin}>
+          <Text style={Styles.txtFooter2}>Login.</Text>
         </TouchableOpacity>
       </View>
       <View style={Styles.footerEnd}>
@@ -77,7 +82,7 @@ const Styles = StyleSheet.create({
     width: 9.38,
     height: 17.47,
     color: '#000',
-    marginTop: 56,
+    marginTop: 44,
     marginLeft: 16.41,
     position: 'absolute',
     backgroundColor: '#262626',
@@ -175,8 +180,6 @@ const Styles = StyleSheet.create({
   txtFooter1: {},
   txtFooter2: {color: '#3797EF'},
 
-  txtFooter1: {},
-  txtFooter2: {color: '#3797EF'},
   footerEnd: {flexDirection: 'column', position: 'relative', top: 10},
   row2: {width: 395, backgroundColor: '#676060', height: 1, marginTop: 9},
   txtEndins: {textAlign: 'center', marginTop: 32.5},
