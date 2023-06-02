@@ -33,25 +33,19 @@ export default Home
 const styles = StyleSheet.create({
 
   container: {
-    backgroundColor: '#FFFFFF',
     flex: 1
-
   },
   headerView: {
-    marginTop: 16,
     paddingHorizontal: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 10
-
+    alignItems:'center',
+    height:54
   },
   storyView: {
     height: 98,
-    borderTopWidth: 1,
-    borderColor: '#0000003A',
-    
-   
+    borderColor: '#00000030',
+    backgroundColor:'#fff'
   }
 
 })

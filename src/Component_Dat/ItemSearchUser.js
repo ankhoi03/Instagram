@@ -11,30 +11,33 @@ import {
 import React from 'react';
 
 const ItemSearchUser = props => {
-  const {data} = props;
-  console.log(data);
+  const { data } = props;
   return (
-    <View>
-      <TouchableOpacity>
-        <View
-          style={{flexDirection: 'row', marginTop: 20, paddingHorizontal: 24}}>
-          <Image source={data.images} style={{width: 64, height: 64}} />
-          <View
-            style={{
-              flexDirection: 'column',
-              justifyContent: 'center',
-              marginStart: 15,
-            }}>
-            <Text style={{fontWeight: 'bold', color: '#000000'}}>
-              {data.name}
-            </Text>
-            <Text style={{color: '#A3A3A3'}}>{data.title}</Text>
 
-            
-          </View>
+    <TouchableOpacity style={{ flexDirection: 'row', height: 80, alignItems: 'center' }}>
+      <Image source={data.images} style={{ width: 64, height: 64, borderRadius: 99 }} />
+      <View
+        style={{
+          flexDirection: 'column',
+          justifyContent: 'center',
+          marginStart: 10,
+          width: '90%',
+          height: '90%',
+          borderBottomWidth: 1, borderColor: '#00000030'
+        }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center',marginBottom:5 }}>
+          <Text style={{ fontWeight: '600', color: '#000000', fontSize: 18 }}>
+            {data.username}
+          </Text>
+          <Image Image style={{ width: 15, height: 15, marginTop: 2,marginStart:4 }} source={require('../image_Khoi/official_icon.png')} />
         </View>
-      </TouchableOpacity>
-    </View>
+
+        <Text numberOfLines={1} style={{ color: '#A3A3A3', fontSize: 14, fontWeight: '400',width:'90%' }}>{data.title}</Text>
+
+
+      </View>
+    </TouchableOpacity>
+
   );
 };
 

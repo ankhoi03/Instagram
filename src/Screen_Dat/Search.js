@@ -91,14 +91,14 @@ const data = [
     },
 ];
 
-const Search = () => {
+const Search = (props) => {
+    const { navigation } = props;
+    const gotoSearchAccount = () => {
+        navigation.navigate('SearchAccount')
+    }
     return (
         <View style={styles.container}>
-            <StatusBar
-                barStyle={'dark-content'}
-                translucent={true}
-                backgroundColor={'transparent'}></StatusBar>
-            <View style={{ flexDirection: 'row', alignItems: 'center', padding: 24 }}>
+            <View style={styles.header}>
                 <View style={styles.searchView}>
                     <Image
                         style={{ width: 20, height: 20 }}
@@ -107,10 +107,8 @@ const Search = () => {
                         style={styles.textInput}
                         placeholder="Search"
                         placeholderTextColor={'white'}
+                        onPressIn={gotoSearchAccount}
                     />
-                    <TouchableOpacity>
-                        <Image name="check" size={18} color="#4E4B66" />
-                    </TouchableOpacity>
                 </View>
             </View>
             <View style={{ flex: 1 }}>
@@ -130,24 +128,28 @@ export default Search
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: 'white',
         flex: 1,
-        paddingTop: 30,
+    },
+    header: {
+        justifyContent:'center',
+        height:54,
+        paddingHorizontal: 20,
+    
     },
     searchView: {
         width: '100%',
-        height: 40,
+        height: 36,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        borderRadius: 10,
+        borderRadius: 6,
         alignItems: 'center',
         padding: 10,
         backgroundColor: '#BBBBC3',
 
     },
     textInput: {
-        height: 36,
-        width: 280,
+        height: 32,
+        width: "92%",
         padding: 5,
     },
 });

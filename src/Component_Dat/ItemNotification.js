@@ -8,7 +8,7 @@ const ItemNotification = (props) => {
 
     return (
 
-        <TouchableOpacity style={{ borderBottomWidth: 0.5, height: 90, justifyContent: 'center', flexDirection: 'row', paddingHorizontal: 20, alignItems: 'center' }}>
+        <TouchableOpacity style={{ borderBottomWidth: 1,borderColor:'#00000030', height: 80, justifyContent: 'center', flexDirection: 'row', paddingHorizontal: 20, alignItems: 'center',paddingVertical:5 }}>
             <Image source={data.images} style={{ width: 64, height: 64, borderRadius: 99 }} />
             <View style={{
                 flexDirection: 'row',
@@ -18,13 +18,13 @@ const ItemNotification = (props) => {
 
             }}>
                 <View style={{ flexDirection: 'row', width: textWidth }}>
-                    <Text style={{ fontWeight: 'bold', color: '#000000' }}>{data.name}
-                        <Text style={{ color: '#A3A3A3' }}> {data.title}</Text>
+                    <Text style={{ fontWeight: 'bold', color: '#000000',fontSize:16 }}>{data.username}
+                        <Text style={{ color: '#A3A3A3',fontSize:14 }}> {data.title}</Text>
                     </Text>
 
                 </View>
 
-                <Image source={data.imagess} style={{ width: 60, height: 60 }} />
+                <Image source={data.images} style={{ width: 60, height: 60 }} />
 
             </View>
 

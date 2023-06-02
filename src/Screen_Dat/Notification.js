@@ -5,48 +5,15 @@ import ItemNotification from '../Component_Dat/ItemNotification';
 
 
 
-const data = [
-    {
-        id: '1',
-        images: require('../Image_Dat/Oval.png'),
-        name: 'Joshua',
-        title: 'Have a nice day, bro!',
-        imagess: require('../Image_Dat/ntf1.png'),
 
-    },
-    {
-        id: '2',
-        images: require('../Image_Dat/avt1.png'),
-        name: 'Karenne',
-        title: 'I heard this is a good movie',
-        imagess: require('../Image_Dat/ntf1.png'),
-    },
-    {
-        id: '3',
-        images: require('../Image_Dat/avt2.png'),
-        name: 'martini_rond',
-        title: 'See you on the next meeting!',
-        imagess: require('../Image_Dat/ntf1.png'),
-    },
-    {
-        id: '4',
-        images: require('../Image_Dat/avt3.png'),
-        name: 'andrewww_',
-        title: 'Sounds good 😂😂😂',
-        imagess: require('../Image_Dat/ntf1.png'),
-    },
-];
+
 const Notification = () => {
     return (
-        <View style={{ flex: 1, backgroundColor: 'white' }}>
-            <StatusBar
-                barStyle={'dark-content'}
-                translucent={true}
-                backgroundColor={'transparent'}></StatusBar>
-            <View style={{ marginTop: 35, borderBottomWidth: 0.5 }}>
-                <Text style={{ fontSize: 15, fontWeight: '900', paddingHorizontal: 24, marginBottom: 15, color: '#000000' }}>Notifications</Text>
+        <View style={{ flex: 1 }}>
+            <View style={styles.header}>
+                <Text style={{ fontSize: 18, fontWeight: '900', color: '#000000' }}>Notifications</Text>
             </View>
-            <View style={{ height: 500 }}>
+            <View style={{ flex:1 ,backgroundColor:'#fff'}}>
                 <FlatList
                     data={data}
                     renderItem={({ item }) => <ItemNotification data={item} />}
@@ -60,5 +27,86 @@ const Notification = () => {
 export default Notification
 
 const styles = StyleSheet.create({
-
+    header: {
+        height:54,
+        paddingHorizontal: 20,
+        justifyContent: 'center'
+    },
 })
+
+const data = [
+    {
+      id: '1',
+      images: require('../image_Khoi/myx1.jpg'),
+      username: 'tmy_dthuong',
+      title:'Mot bong hong xinh tuoi tham',
+    },
+    {
+      id: '2',
+      images: require('../image_Khoi/myx2.jpg'),
+      username: 'tmy_dthuong',
+      title:'Mot bong hong xinh tuoi tham',
+    },
+    {
+      id: '3',
+      images: require('../image_Khoi/myx3.jpg'),
+      username: 'tmy_dthuong',
+      title:'Mot bong hong xinh tuoi tham',
+    },
+    {
+      id: '4',
+      images: require('../image_Khoi/myx4.jpg'),
+      username: 'tmy_dthuong',
+      title:'Mot bong hong xinh tuoi tham',
+    },
+    {
+      id: '5',
+      images: require('../image_Khoi/myx5.jpg'),
+      username: 'tmy_dthuong',
+      title:'Mot bong hong xinh tuoi tham',
+    },
+    {
+      id: '6',
+      images: require('../image_Khoi/myx6.jpg'),
+      username: 'tmy_dthuong',
+      title:'Mot bong hong xinh tuoi tham',
+    },
+    {
+      id: '7',
+      images: require('../image_Khoi/myx7.jpg'),
+      username: 'tmy_dthuong',
+      title:'Mot bong hong xinh tuoi tham',
+    },
+    {
+      id: '8',
+      images: require('../image_Khoi/myx8.jpg'),
+      username: 'tmy_dthuong',
+      title:'Mot bong hong xinh tuoi tham',
+    },
+    {
+      id: '9',
+      images: require('../image_Khoi/myx9.jpg'),
+      username: 'tmy_dthuong',
+      title:'Mot bong hong xinh tuoi tham',
+    },
+    {
+      id: '10',
+      images: require('../image_Khoi/myx10.jpg'),
+      username: 'tmy_dthuong',
+      title:'Mot bong hong xinh tuoi tham',
+    },
+    {
+      id: '11',
+      images: require('../image_Khoi/myx11.jpg'),
+      username: 'tmy_dthuong',
+      title:'Mot bong hong xinh tuoi tham',
+    },
+    {
+      id: '12',
+      images: require('../image_Khoi/myx8.jpg'),
+      username: 'tmy_dthuong',
+      title:'Mot bong hong xinh tuoi tham',
+    },
+  
+  ];
+  

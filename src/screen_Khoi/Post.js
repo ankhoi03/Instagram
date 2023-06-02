@@ -18,9 +18,6 @@ const Post = () => {
     return (
         <View style={Styles.container}>
             <View style={Styles.header}>
-                <TouchableOpacity style={Styles.btnBack}>
-                    <Image source={require('../image_Khoi/Back.png')}></Image>
-                </TouchableOpacity>
                 <Text style={Styles.txtSttPost}>Post Status</Text>
 
                 <TouchableOpacity style={Styles.btnPost}>
@@ -64,8 +61,7 @@ const Styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginTop: 16,
-        marginBottom: 15,
+        height:54,
         paddingHorizontal: 20,
         alignItems: 'center'
     },

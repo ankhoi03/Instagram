@@ -108,16 +108,16 @@ const ItemPost = (props) => {
                     <View style={styles.btmView}>
 
                         <TouchableOpacity onPress={inBeta} style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
-                            <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/setting.png')} />
-                            <Text style={styles.optionText} >Setting</Text>
+                            <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/hide.png')} />
+                            <Text style={styles.optionText} >Hidden this post</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={inBeta} style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
-                            <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/your_act.png')} />
-                            <Text style={styles.optionText} >Your activity</Text>
+                            <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/post_report.png')} />
+                            <Text style={[styles.optionText,{color:'red'}]} >Report this post</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
-                            <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/change_pass.png')} />
-                            <Text style={styles.optionText} >Change Password</Text>
+                            <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/user_report.png')} />
+                            <Text style={[styles.optionText,{color:'red'}]} >Report account</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     },
     btmView: {
         borderTopWidth: 1,
-        borderColor: 'black',
+        borderColor: '#00000060',
         justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal:20,

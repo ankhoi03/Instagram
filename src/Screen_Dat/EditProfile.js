@@ -1,20 +1,19 @@
 import { Image, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 
-const EditProfile = () => {
+const EditProfile = (props) => {
+  const { navigation } = props;
+  const goBack = () => {
+    navigation.goBack();
+  }
   const [text, setText] = useState('');
   const handleTextChange = (inputText) => {
     setText(inputText);
   };
   return (
     <View style={styles.container}>
-      <StatusBar
-        barStyle={'dark-content'}
-        translucent={true}
-        backgroundColor={'#FAFAFA'}></StatusBar>
-      <View style={{ backgroundColor: '#ffffff', flex: 1 }}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20, paddingBottom: 10, backgroundColor: '#FAFAFA', paddingTop: 44 }}>
-          <TouchableOpacity style={{ width: 70 }}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20 ,alignItems:'center',height:64}}>
+          <TouchableOpacity style={{ width: 70 }} onPress={goBack}>
             <Text style={styles.textCancel}>Cancel</Text>
           </TouchableOpacity>
           <Text style={styles.textEditProfile}>Edit Profile</Text>
@@ -24,7 +23,7 @@ const EditProfile = () => {
         </View>
 
         <View style={styles.viewimgProfile}>
-          <Image source={require('../Image_Dat/edProfile1.png')} />
+          <Image style={{width:100,height:100,borderRadius:99}} source={require('../image_Khoi/myx1.jpg')} />
           <TouchableOpacity>
             <Text style={styles.textchangeProfile}>Change Profile Photo</Text>
           </TouchableOpacity>
@@ -51,7 +50,7 @@ const EditProfile = () => {
               placeholder='Website' />
           </View>
         </View>
-        <View style={[styles.viewdadtextInput, { borderBottomWidth: 0.5 }]}>
+        <View style={[styles.viewdadtextInput, { borderBottomWidth: 0.5,borderColor:'#00000080' }]}>
           <View style={styles.viewtitle}>
             <Text style={styles.textName}>Bio</Text>
             <TextInput style={[styles.textinput, { height: 60, borderBottomWidth: 0 }]}
@@ -67,7 +66,10 @@ const EditProfile = () => {
 
         <Text style={styles.textswitch}>Switch to Professional Account</Text>
         <Text style={styles.textPrivate}>Private Information</Text>
-        <View style={[styles.viewdadtextInput, { marginTop: 20 }]}>
+
+
+        <View style={{flex:1,backgroundColor:'#fff'}}>
+        <View style={styles.viewdadtextInput}>
           <View style={styles.viewtitle}>
             <Text style={styles.textName}>Email</Text>
             <TextInput style={styles.textinput}
@@ -88,8 +90,7 @@ const EditProfile = () => {
               placeholder='Male' />
           </View>
         </View>
-
-      </View>
+        </View>
 
     </View>
   )
@@ -104,37 +105,36 @@ const styles = StyleSheet.create({
   textCancel: {
     color: '#262626',
     fontSize: 16,
-    fontWeight: '500'
+    fontWeight: '400'
   },
   textEditProfile: {
     color: '#262626',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '900'
   },
   textDone: {
     color: '#3897F0',
     fontSize: 16,
-    fontWeight: '900',
+    fontWeight: '600',
     alignSelf: 'flex-end'
   },
-  viewimgProfile: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ffffff',
-    paddingTop: 20
+  viewimgProfile:{
+      backgroundColor:'#fff',
+      paddingVertical:20,
+      justifyContent:'center',
+      alignItems:'center'
   },
   textchangeProfile: {
     color: '#3897F0',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '900',
-    marginTop: 10
+    marginTop: 10,
   },
   viewdadtextInput: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 20,
     backgroundColor: '#ffffff',
-    marginTop: 10
   },
 
   viewtitle: {
@@ -178,13 +178,15 @@ const styles = StyleSheet.create({
     color: '#3897F0',
     fontSize: 15,
     fontWeight: '400',
-    padding: 20,
+    paddingHorizontal:20,
+    paddingVertical:15
   },
   textPrivate: {
     fontSize: 15,
     fontWeight: '900',
     paddingHorizontal: 20,
-    color: '#000000'
+    color: '#000000',
+    marginBottom:15
   },
 
 

@@ -1,13 +1,16 @@
 import { StyleSheet, Text, View, StatusBar, Image, TouchableOpacity, Dimensions, ScrollView, ToastAndroid } from 'react-native'
-import React, { useRef,useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import MyPostTab from '../component_Khoi/MyPostTab';
 import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
 import MyBookmarkTab from '../component_Khoi/MyBookmarkTab';
 import Modal from "react-native-modal";
 
-const Profile = () => {
-
+const Profile = (props) => {
+    const { navigation } = props;
+    const gotoEditProfile = () => {
+        navigation.navigate('EditProfile');
+    }
     const [visible, setvisible] = useState(false);
     const inBeta = () => {
         ToastAndroid.show('Tính năng đang phát triển', ToastAndroid.SHORT);
@@ -55,7 +58,8 @@ const Profile = () => {
                     <Text style={styles.username}>tmy_dthuong</Text>
                     <Image style={{ width: 15, height: 15, marginTop: 5 }} source={require('../image_Khoi/official_icon.png')}></Image>
                 </View>
-                <TouchableOpacity onPress={()=>setvisible(true)}>
+
+                <TouchableOpacity onPress={() => setvisible(true)}>
                     <Image source={require('../image_Khoi/Menu.png')}></Image>
                 </TouchableOpacity>
             </View>
@@ -75,11 +79,13 @@ const Profile = () => {
                     <Text style={styles.ttText}>Following</Text>
                 </TouchableOpacity>
             </View>
-            <Text style={styles.name}>Mỹ Nguyễn</Text>
-            <Text numberOfLines={2} style={styles.gtText}>Mot bong hong xinh tuoi tham</Text>
-            <TouchableOpacity style={styles.btnEdit}>
-                <Text style={styles.editprofileText}>Edit Profile</Text>
-            </TouchableOpacity>
+            <View style={{ backgroundColor: '#fff' }}>
+                <Text style={styles.name}>Mỹ Nguyễn</Text>
+                <Text numberOfLines={2} style={styles.gtText}>Mot bong hong xinh tuoi tham</Text>
+                <TouchableOpacity style={styles.btnEdit} onPress={gotoEditProfile}>
+                    <Text style={styles.editprofileText}>Edit Profile</Text>
+                </TouchableOpacity>
+            </View>
             <View style={styles.tabView}>
                 <TabView
                     navigationState={{ index, routes }}
@@ -90,30 +96,31 @@ const Profile = () => {
                 />
             </View>
 
+
             <Modal
-                style={{ width: '100%', marginLeft: 0, marginRight: 0}}
-                isVisible={visible} onBackdropPress={()=>setvisible(false)}
-                onBackButtonPress={()=>setvisible(false)}
-                
+                style={{ width: '100%', marginLeft: 0, marginRight: 0 }}
+                isVisible={visible} onBackdropPress={() => setvisible(false)}
+                onBackButtonPress={() => setvisible(false)}
+
             >
                 <View style={styles.optionView}>
                     <View style={{ padding: 20 }}>
 
 
                         <TouchableOpacity onPress={inBeta} style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
-                            <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/setting.png')} />
+                            <Image  source={require('../image_Khoi/icon_bottomsheet/settings.png')} />
                             <Text style={styles.optionText} >Setting</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={inBeta} style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
-                            <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/your_act.png')} />
+                            <Image  source={require('../image_Khoi/icon_bottomsheet/your_active.png')} />
                             <Text style={styles.optionText} >Your activity</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
-                            <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/change_pass.png')} />
+                            <Image  source={require('../image_Khoi/icon_bottomsheet/change_password.png')} />
                             <Text style={styles.optionText} >Change Password</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
-                            <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/logout.png')} />
+                            <Image source={require('../image_Khoi/icon_bottomsheet/logout.png')} />
                             <Text style={styles.optionText} >Log out</Text>
                         </TouchableOpacity>
                     </View>
@@ -126,7 +133,8 @@ const Profile = () => {
 
 
             </Modal>
-          
+
+
         </View>
 
 
@@ -137,16 +145,14 @@ export default Profile
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#FFFFFF',
         flex: 1
     },
     headerView: {
-        marginTop: 16,
-        paddingHorizontal: 20,
+        height: 54,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
-
+        alignItems: 'center',
+        paddingHorizontal: 20
     },
     username: {
         fontFamily: 'Poppins',
@@ -159,8 +165,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop: 20,
-        paddingHorizontal: 20
+        paddingTop: 10,
+        paddingHorizontal: 20,
+        backgroundColor: '#fff'
     },
     profileText: {
         fontFamily: 'Poppins',
@@ -175,8 +182,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     imgProfile: {
-        width: 96,
-        height: 96,
+        width: 100,
+        height: 100,
         borderRadius: 99
     },
     nummberText: {
@@ -226,8 +233,9 @@ const styles = StyleSheet.create({
         color: '#262626',
     },
     tabView: {
-        marginTop: 20,
+        paddingTop: 20,
         flex: 1,
+        backgroundColor: '#fff'
     },
     optionText: {
         fontFamily: 'Poppins',
@@ -252,10 +260,6 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#fff'
 
-    },
-    btsImg: {
-        width: 24,
-        height: 24
     }
 
 })

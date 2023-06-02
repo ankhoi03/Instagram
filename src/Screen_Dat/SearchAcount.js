@@ -11,78 +11,18 @@ import {
 import React from 'react';
 import ItemSearchUser from '../Component_Dat/ItemSearchUser';
 
-const data = [
-  {
-    id: '1',
-    images: require('../Image_Dat/Oval.png'),
-    name: 'Joshua',
-    title: 'Have a nice day, bro!',
-  },
-  {
-    id: '2',
-    images: require('../Image_Dat/avt1.png'),
-    name: 'Karenne',
-    title: 'I heard this is a good movie, s…',
-  },
-  {
-    id: '3',
-    images: require('../Image_Dat/avt2.png'),
-    name: 'martini_rond',
-    title: 'See you on the next meeting!',
-  },
-  {
-    id: '4',
-    images: require('../Image_Dat/avt3.png'),
-    name: 'andrewww_',
-    title: 'Sounds good 😂😂😂',
-  },
-  {
-    id: '5',
-    images: require('../Image_Dat/avt3.png'),
-    name: 'andrewww_',
-    title: 'Sounds good 😂😂😂',
-  },
-  {
-    id: '6',
-    images: require('../Image_Dat/avt3.png'),
-    name: 'andrewww_',
-    title: 'Sounds good 😂😂😂',
-  },
-  {
-    id: '7',
-    images: require('../Image_Dat/avt3.png'),
-    name: 'andrewww_',
-    title: 'Sounds good 😂😂😂',
-  },
-  {
-    id: '8',
-    images: require('../Image_Dat/avt3.png'),
-    name: 'andrewww_',
-    title: 'Sounds good 😂😂😂',
-  },
-  {
-    id: '9',
-    images: require('../Image_Dat/avt3.png'),
-    name: 'andrewww_',
-    title: 'Sounds good 😂😂😂',
-  },
-  {
-    id: '10',
-    images: require('../Image_Dat/avt3.png'),
-    name: 'andrewww_',
-    title: 'Sounds good 😂😂😂',
-  },
-];
 
-const SearchAcount = () => {
+
+const SearchAcount = (props) => {
+  const { navigation } = props;
+  const goBack = () => {
+    navigation.goBack();
+}
   return (
     <View style={styles.container}>
-      <StatusBar
-        barStyle={'dark-content'}
-        translucent={true}
-        backgroundColor={'transparent'}></StatusBar>
-      <View style={{ flexDirection: 'row', alignItems: 'center', padding: 24 }}>
-        <TouchableOpacity>
+     
+      <View style={styles.header}>
+        <TouchableOpacity onPress={goBack} style={{width:20,height:36,justifyContent:'center'}}>
           <Image source={require('../Image_Dat/Back.png')} />
         </TouchableOpacity>
         <View style={styles.searchView}>
@@ -94,16 +34,14 @@ const SearchAcount = () => {
             placeholder="Search"
             placeholderTextColor={'white'}
           />
-          <TouchableOpacity>
-            <Image name="check" size={18} color="#4E4B66" />
-          </TouchableOpacity>
         </View>
       </View>
-      <View>
+      <View style={{flex:1,paddingHorizontal:20,backgroundColor:'#fff'}}>
         <FlatList
           data={data}
           renderItem={({ item }) => <ItemSearchUser data={item} />}
           keyExtractor={item => item.id}
+          showsVerticalScrollIndicator={false}
         />
       </View>
     </View>
@@ -114,16 +52,21 @@ export default SearchAcount;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    flex: 1,
-    paddingTop: 30,
+    flex: 1
   },
-  searchView: {
-    width: 330,
-    height: 40,
+  header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderRadius: 10,
+    height:54,
+    paddingHorizontal: 20,
+    alignItems: 'center'
+},
+  searchView: {
+    width: '92%',
+    height: 36,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderRadius: 6,
     alignItems: 'center',
     padding: 10,
     backgroundColor: '#BBBBC3',
@@ -131,7 +74,83 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 36,
-    width: 280,
+    width: '92%',
     padding: 5,
   },
 });
+
+const data = [
+  {
+    id: '1',
+    images: require('../image_Khoi/myx1.jpg'),
+    username: 'tmy_dthuong',
+    title:'Mot bong hong xinh tuoi tham',
+  },
+  {
+    id: '2',
+    images: require('../image_Khoi/myx2.jpg'),
+    username: 'tmy_dthuong',
+    title:'Mot bong hong xinh tuoi tham',
+  },
+  {
+    id: '3',
+    images: require('../image_Khoi/myx3.jpg'),
+    username: 'tmy_dthuong',
+    title:'Mot bong hong xinh tuoi tham',
+  },
+  {
+    id: '4',
+    images: require('../image_Khoi/myx4.jpg'),
+    username: 'tmy_dthuong',
+    title:'Mot bong hong xinh tuoi tham',
+  },
+  {
+    id: '5',
+    images: require('../image_Khoi/myx5.jpg'),
+    username: 'tmy_dthuong',
+    title:'Mot bong hong xinh tuoi tham',
+  },
+  {
+    id: '6',
+    images: require('../image_Khoi/myx6.jpg'),
+    username: 'tmy_dthuong',
+    title:'Mot bong hong xinh tuoi tham',
+  },
+  {
+    id: '7',
+    images: require('../image_Khoi/myx7.jpg'),
+    username: 'tmy_dthuong',
+    title:'Mot bong hong xinh tuoi tham',
+  },
+  {
+    id: '8',
+    images: require('../image_Khoi/myx8.jpg'),
+    username: 'tmy_dthuong',
+    title:'Mot bong hong xinh tuoi tham',
+  },
+  {
+    id: '9',
+    images: require('../image_Khoi/myx9.jpg'),
+    username: 'tmy_dthuong',
+    title:'Mot bong hong xinh tuoi tham',
+  },
+  {
+    id: '10',
+    images: require('../image_Khoi/myx10.jpg'),
+    username: 'tmy_dthuong',
+    title:'Mot bong hong xinh tuoi tham',
+  },
+  {
+    id: '11',
+    images: require('../image_Khoi/myx11.jpg'),
+    username: 'tmy_dthuong',
+    title:'Mot bong hong xinh tuoi tham',
+  },
+  {
+    id: '12',
+    images: require('../image_Khoi/myx8.jpg'),
+    username: 'tmy_dthuong',
+    title:'Mot bong hong xinh tuoi tham',
+  },
+
+];
