@@ -30,6 +30,7 @@ const Post = () => {
                     style={Styles.imgAvatar}
                     source={require('../image_Khoi/myx1.jpg')}></Image>
                 <Text style={Styles.txtName}>tmy_dthuong</Text>
+                <Image Image style={{ width: 15, height: 15, marginTop: 2, marginStart: 4 }} source={require('../image_Khoi/official_icon.png')} />
             </View>
             <TextInput
                 style={Styles.NoteStyle}
@@ -44,7 +45,7 @@ const Post = () => {
                         style={Styles.imgAdd}
                         source={require('../image_Khoi/Add.png')}
                     />
-                    
+
                 </TouchableOpacity>
                 <Text style={Styles.txtAdd}>Add Image</Text>
             </View>
@@ -61,7 +62,7 @@ const Styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        height:54,
+        height: 54,
         paddingHorizontal: 20,
         alignItems: 'center'
     },
@@ -98,15 +99,15 @@ const Styles = StyleSheet.create({
         alignItems: 'center', paddingHorizontal: 20,
         backgroundColor: '#fff',
         height: 92,
-        borderColor:'#00000030',
-        borderBottomWidth:1,
+        borderColor: '#00000030',
+        borderBottomWidth: 1,
     },
 
-    imgAvatar: { width: 56, height: 56, borderRadius: 99 },
-    txtName: { marginLeft: 15, fontSize: 20, color: 'black' },
+    imgAvatar: { width: 64, height: 64, borderRadius: 99 },
+    txtName: { marginLeft: 10, fontSize: 18, color: 'black', fontWeight: '600' },
     Body: {
         width: '100%',
-        flex:1,
+        flex: 1,
         backgroundColor: '#F2F1F1',
         marginTop: 18,
         justifyContent: 'center',
@@ -128,6 +129,6 @@ const Styles = StyleSheet.create({
         paddingHorizontal: 12,
         paddingVertical: 8,
         textAlignVertical: 'top',
-        backgroundColor:'#fff',
+        backgroundColor: '#fff',
     }
 });

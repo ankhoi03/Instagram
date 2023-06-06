@@ -1,5 +1,5 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image, StatusBar, TextInput,KeyboardAvoidingView, Dimensions } from 'react-native'
-import React from 'react'
+import React,{useState} from 'react'
 
 const Login = (props) => {
     const { navigation } = props;
@@ -12,6 +12,9 @@ const Login = (props) => {
       const goToHome = () => {
         navigation.navigate('HomeTab');
       }
+
+     const [username, setusername] = useState('tmy_dthuong') 
+     const [password, setpassword] = useState('ntmy2003');
     return (
 
         <View style={styles.container}>
@@ -20,8 +23,8 @@ const Login = (props) => {
                     <Image style={styles.btnBack} source={require('../image_Khoi/Back.png')}></Image>
                 </TouchableOpacity>
                 <Image style={styles.logo} source={require('../image_Khoi/Instagram_Logo.png')}></Image>
-                <TextInput style={styles.textInput} placeholder='Username' placeholderTextColor={'#67606070'}></TextInput>
-                <TextInput secureTextEntry={true} style={[styles.textInput, { marginTop: 12 }]} placeholder='Password' placeholderTextColor={'#67606070'}></TextInput>
+                <TextInput style={styles.textInput} placeholder='Username' placeholderTextColor={'#67606070'} onChangeText={setusername} value={username}></TextInput>
+                <TextInput secureTextEntry={true} style={[styles.textInput, { marginTop: 12 }]} placeholder='Password' placeholderTextColor={'#67606070'} onChangeText={setpassword} value={password}></TextInput>
                 <TouchableOpacity style={styles.btnForgotPass}>
                     <Text style={styles.forgotText}>Forgot password?</Text>
                 </TouchableOpacity>

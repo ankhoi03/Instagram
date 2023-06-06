@@ -1,37 +1,67 @@
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import ItemImageProfile from './ItemImageProfile'
+import ItemFollower from '../component_Khoi/ItemFollower'
 
-const MyPostTab = () => {
+
+const Follower = (props) => {
+  const { navigation } = props;
+  const goBack = () => {
+    navigation.goBack();
+  }
   return (
     <View style={styles.container}>
-
-
-
-
-
-      <View style={{ flex: 1 }}>
+      <View style={{ flexDirection: 'row', alignItems: 'center',height:54,justifyContent:'space-between',paddingHorizontal:20 }}>
+        <TouchableOpacity onPress={goBack} style={{ height: 36,width:20, alignItems: 'flex-start', justifyContent: 'center' }}>
+          <Image source={require('../Image_Dat/Back.png')} />
+        </TouchableOpacity>
+        <View style={styles.searchView}>
+          <Image
+            style={{ width: 20, height: 20 }}
+            source={require('../Image_Dat/Search.png')} />
+          <TextInput
+            style={styles.textInput}
+            placeholder="Search"
+            placeholderTextColor={'white'}
+          />
+          <TouchableOpacity>
+            <Image name="check" size={18} color="#4E4B66" />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={{  backgroundColor:'#ffffff',paddingHorizontal:20}}>
         <FlatList
-          showsVerticalScrollIndicator={false}
           data={data}
-          numColumns={3}
-          renderItem={({ item }) => <ItemImageProfile data={item} />}
+          renderItem={({ item }) => <ItemFollower data={item} />}
           keyExtractor={item => item.id}
+          showsVerticalScrollIndicator={false}
         />
       </View>
     </View>
   )
 }
 
-export default MyPostTab
+export default Follower
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'white'
-  }
-})
-
+    flex: 1
+  },
+  searchView: {
+    width: '90%',
+    height: 36,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderRadius: 6,
+    alignItems: 'center',
+    padding: 10,
+    backgroundColor: '#BBBBC3',
+  },
+  textInput: {
+    height: 36,
+    width: '92%',
+    padding: 5,
+  },
+});
 
 const data = [
   {

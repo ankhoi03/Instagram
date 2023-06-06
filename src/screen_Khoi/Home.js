@@ -62,6 +62,11 @@ const data = [
     username: 'tmy_dthuong'
   },
   {
+    id: '14',
+    images: require('../image_Khoi/myx14.jpg'),
+    username: 'tmy_dthuong'
+  },
+  {
     id: '3',
     images: require('../image_Khoi/myx3.jpg'),
     username: 'tmy_dthuong'
@@ -69,6 +74,11 @@ const data = [
   {
     id: '4',
     images: require('../image_Khoi/myx4.jpg'),
+    username: 'tmy_dthuong'
+  },
+  {
+    id: '12',
+    images: require('../image_Khoi/myx12.jpg'),
     username: 'tmy_dthuong'
   },
   {
@@ -82,10 +92,21 @@ const data = [
     username: 'tmy_dthuong'
   },
   {
+    id: '16',
+    images: require('../image_Khoi/myx16.jpg'),
+    username: 'tmy_dthuong'
+  },
+  {
     id: '7',
     images: require('../image_Khoi/myx7.jpg'),
     username: 'tmy_dthuong'
   },
+  {
+    id: '15',
+    images: require('../image_Khoi/myx15.jpg'),
+    username: 'tmy_dthuong'
+  },
+ 
   {
     id: '8',
     images: require('../image_Khoi/myx8.jpg'),
@@ -106,10 +127,12 @@ const data = [
     images: require('../image_Khoi/myx11.jpg'),
     username: 'tmy_dthuong'
   },
+  
   {
-    id: '12',
-    images: require('../image_Khoi/myx8.jpg'),
+    id: '13',
+    images: require('../image_Khoi/myx13.jpg'),
     username: 'tmy_dthuong'
   },
+  
 
 ];

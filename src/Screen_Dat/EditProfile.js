@@ -12,7 +12,7 @@ const EditProfile = (props) => {
   };
   return (
     <View style={styles.container}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20 ,alignItems:'center',height:64}}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 20 ,alignItems:'center',height:54}}>
           <TouchableOpacity style={{ width: 70 }} onPress={goBack}>
             <Text style={styles.textCancel}>Cancel</Text>
           </TouchableOpacity>
@@ -33,21 +33,21 @@ const EditProfile = (props) => {
           <View style={styles.viewtitle}>
             <Text style={styles.textName}>Name</Text>
             <TextInput style={styles.textinput}
-              placeholder='Pandari_j' />
+              placeholder='Mỹ Nguyễn'/>
           </View>
         </View>
         <View style={styles.viewdadtextInput}>
           <View style={styles.viewtitle}>
             <Text style={styles.textName}>Username</Text>
             <TextInput style={styles.textinput}
-              placeholder='Pandari_j' />
+              placeholder='tmy_dethuong' />
           </View>
         </View>
         <View style={styles.viewdadtextInput}>
           <View style={styles.viewtitle}>
             <Text style={styles.textName}>Website</Text>
             <TextInput style={styles.textinput}
-              placeholder='Website' />
+              placeholder='null' />
           </View>
         </View>
         <View style={[styles.viewdadtextInput, { borderBottomWidth: 0.5,borderColor:'#00000080' }]}>
@@ -58,7 +58,7 @@ const EditProfile = (props) => {
               numberOfLines={2}
               value={text}
               onChangeText={handleTextChange}
-              placeholder='Digital goodies designer @pixsellz Everything is designed.' />
+              placeholder='Mot bong hong xinh tuoi tham' />
           </View>
         </View>
 
@@ -73,21 +73,21 @@ const EditProfile = (props) => {
           <View style={styles.viewtitle}>
             <Text style={styles.textName}>Email</Text>
             <TextInput style={styles.textinput}
-              placeholder='jacob.west@gmail.com' />
+              placeholder='ntmy2011@gmail.com'/>
           </View>
         </View>
         <View style={styles.viewdadtextInput}>
           <View style={styles.viewtitle}>
             <Text style={styles.textName}>Phone</Text>
             <TextInput style={styles.textinput}
-              placeholder='+1 202 555 0147' />
+              placeholder='0985001820'/>
           </View>
         </View>
         <View style={styles.viewdadtextInput}>
           <View style={styles.viewtitle}>
             <Text style={styles.textName}>Gender</Text>
             <TextInput style={styles.textinput}
-              placeholder='Male' />
+              placeholder='Female'/>
           </View>
         </View>
         </View>

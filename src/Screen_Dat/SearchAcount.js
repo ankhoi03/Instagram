@@ -93,6 +93,12 @@ const data = [
     title:'Mot bong hong xinh tuoi tham',
   },
   {
+    id: '13',
+    images: require('../image_Khoi/myx13.jpg'),
+    username: 'tmy_dthuong',
+    title:'Mot bong hong xinh tuoi tham',
+  },
+  {
     id: '3',
     images: require('../image_Khoi/myx3.jpg'),
     username: 'tmy_dthuong',
@@ -105,8 +111,20 @@ const data = [
     title:'Mot bong hong xinh tuoi tham',
   },
   {
+    id: '14',
+    images: require('../image_Khoi/myx14.jpg'),
+    username: 'tmy_dthuong',
+    title:'Mot bong hong xinh tuoi tham',
+  },
+  {
     id: '5',
     images: require('../image_Khoi/myx5.jpg'),
+    username: 'tmy_dthuong',
+    title:'Mot bong hong xinh tuoi tham',
+  },
+  {
+    id: '15',
+    images: require('../image_Khoi/myx15.jpg'),
     username: 'tmy_dthuong',
     title:'Mot bong hong xinh tuoi tham',
   },
@@ -119,6 +137,12 @@ const data = [
   {
     id: '7',
     images: require('../image_Khoi/myx7.jpg'),
+    username: 'tmy_dthuong',
+    title:'Mot bong hong xinh tuoi tham',
+  },
+  {
+    id: '16',
+    images: require('../image_Khoi/myx15.jpg'),
     username: 'tmy_dthuong',
     title:'Mot bong hong xinh tuoi tham',
   },
@@ -148,7 +172,7 @@ const data = [
   },
   {
     id: '12',
-    images: require('../image_Khoi/myx8.jpg'),
+    images: require('../image_Khoi/myx12.jpg'),
     username: 'tmy_dthuong',
     title:'Mot bong hong xinh tuoi tham',
   },

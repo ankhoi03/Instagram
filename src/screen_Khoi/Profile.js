@@ -11,10 +11,20 @@ const Profile = (props) => {
     const gotoEditProfile = () => {
         navigation.navigate('EditProfile');
     }
+    const gotoFollower = () => {
+        navigation.navigate('Follower');
+    }
+    const gotoFollowing = () => {
+        navigation.navigate('Following');
+    }
+    const gotoAllPost = () => {
+        navigation.navigate('AllPost');
+    }
     const [visible, setvisible] = useState(false);
     const inBeta = () => {
         ToastAndroid.show('Tính năng đang phát triển', ToastAndroid.SHORT);
     }
+    const [allpost, setallpost] = useState(true);
 
     const MyPostRoute = () => (
         <MyPostTab />
@@ -63,29 +73,32 @@ const Profile = (props) => {
                     <Image source={require('../image_Khoi/Menu.png')}></Image>
                 </TouchableOpacity>
             </View>
+            <View >
+                <View style={styles.profileView}>
+                    <Image style={styles.imgProfile} source={require("../image_Khoi/myx1.jpg")}></Image>
+                    <TouchableOpacity style={styles.imformationView} onPress={gotoAllPost}>
+                        <Text style={styles.nummberText}>20</Text>
+                        <Text style={styles.ttText}>Posts</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.imformationView} onPress={gotoFollower}>
+                        <Text style={styles.nummberText}>2.1M</Text>
+                        <Text style={styles.ttText}>Followers</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.imformationView} onPress={gotoFollowing}>
+                        <Text style={styles.nummberText}>1</Text>
+                        <Text style={styles.ttText}>Following</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ backgroundColor: '#fff' }}>
+                    <Text style={styles.name}>Mỹ Nguyễn</Text>
+                    <Text numberOfLines={2} style={styles.gtText}>Mot bong hong xinh tuoi tham</Text>
+                    <TouchableOpacity style={styles.btnEdit} onPress={gotoEditProfile}>
+                        <Text style={styles.editprofileText}>Edit Profile</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
 
-            <View style={styles.profileView}>
-                <Image style={styles.imgProfile} source={require("../image_Khoi/myx1.jpg")}></Image>
-                <TouchableOpacity style={styles.imformationView}>
-                    <Text style={styles.nummberText}>20</Text>
-                    <Text style={styles.ttText}>Posts</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.imformationView}>
-                    <Text style={styles.nummberText}>2.1M</Text>
-                    <Text style={styles.ttText}>Followers</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.imformationView}>
-                    <Text style={styles.nummberText}>1</Text>
-                    <Text style={styles.ttText}>Following</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={{ backgroundColor: '#fff' }}>
-                <Text style={styles.name}>Mỹ Nguyễn</Text>
-                <Text numberOfLines={2} style={styles.gtText}>Mot bong hong xinh tuoi tham</Text>
-                <TouchableOpacity style={styles.btnEdit} onPress={gotoEditProfile}>
-                    <Text style={styles.editprofileText}>Edit Profile</Text>
-                </TouchableOpacity>
-            </View>
+
             <View style={styles.tabView}>
                 <TabView
                     navigationState={{ index, routes }}
@@ -108,15 +121,15 @@ const Profile = (props) => {
 
 
                         <TouchableOpacity onPress={inBeta} style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
-                            <Image  source={require('../image_Khoi/icon_bottomsheet/settings.png')} />
+                            <Image source={require('../image_Khoi/icon_bottomsheet/settings.png')} />
                             <Text style={styles.optionText} >Setting</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={inBeta} style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
-                            <Image  source={require('../image_Khoi/icon_bottomsheet/your_active.png')} />
+                            <Image source={require('../image_Khoi/icon_bottomsheet/your_active.png')} />
                             <Text style={styles.optionText} >Your activity</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
-                            <Image  source={require('../image_Khoi/icon_bottomsheet/change_password.png')} />
+                            <Image source={require('../image_Khoi/icon_bottomsheet/change_password.png')} />
                             <Text style={styles.optionText} >Change Password</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
@@ -223,7 +236,8 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         borderColor: '#0000005A',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom:15
 
     },
     editprofileText: {
@@ -233,7 +247,7 @@ const styles = StyleSheet.create({
         color: '#262626',
     },
     tabView: {
-        paddingTop: 20,
+
         flex: 1,
         backgroundColor: '#fff'
     },

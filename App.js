@@ -33,22 +33,39 @@ import MyPostTab from './src/component_Khoi/MyPostTab';
 import ItemPost from './src/component_Khoi/ItemPost';
 import Home from './src/screen_Khoi/Home';
 import Post from './src/screen_Khoi/Post';
+import ItemImageProfile from './src/component_Khoi/ItemImageProfile'
+import AllPost from './src/screen_Khoi/AllPost'
+import Follower from './src/screen_Khoi/Follower'
+import Following from './src/screen_Khoi/Following'
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
 const App = () => {
-  function SearchComponent() {
-  return (
-    <Stack.Navigator initialRouteName='Search' screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Search" component={Search} />
-      <Stack.Screen name="SearchAccount" component={SearchAcount} />
-    </Stack.Navigator>
-  )
-}
 
-  
+
+  function SearchComponent() {
+    return (
+      <Stack.Navigator initialRouteName='Search' screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Search" component={Search} />
+        <Stack.Screen name="SearchAccount" component={SearchAcount} />
+      </Stack.Navigator>
+    )
+  }
+
+  function ProfileComponent() {
+    return (
+      <Stack.Navigator initialRouteName='Profile' screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="AllPost" component={AllPost} />
+        <Stack.Screen name="Follower" component={Follower} />
+        <Stack.Screen name="Following" component={Following} />
+      </Stack.Navigator>
+    )
+  }
+
+
 
 
   const HomeTabs = () => {
@@ -63,31 +80,31 @@ const App = () => {
               source = focused
                 ? require('./src/image_Khoi/iccon_bottomtab/home_active.png')
                 : require('./src/image_Khoi/iccon_bottomtab/home.png')
-            } else if (route.name === 'Profile') {
+            } else if (route.name === 'ProfileComponent') {
               source = focused
                 ? require('./src/image_Khoi/iccon_bottomtab/profile_active.png')
                 : require('./src/image_Khoi/iccon_bottomtab/profile.png')
             }
             else if (route.name === 'Post') {
-              source =focused
-              ? require('./src/image_Khoi/iccon_bottomtab/post_active.png')
-              : require('./src/image_Khoi/iccon_bottomtab/post.png')
+              source = focused
+                ? require('./src/image_Khoi/iccon_bottomtab/post_active.png')
+                : require('./src/image_Khoi/iccon_bottomtab/post.png')
             }
             else if (route.name === 'SearchComponent') {
-              source =focused
-              ? require('./src/image_Khoi/iccon_bottomtab/search_active.png')
-              : require('./src/image_Khoi/iccon_bottomtab/search.png')
-                
+              source = focused
+                ? require('./src/image_Khoi/iccon_bottomtab/search_active.png')
+                : require('./src/image_Khoi/iccon_bottomtab/search.png')
+
             }
             else if (route.name === 'Notification') {
-              source =focused
-              ? require('./src/image_Khoi/iccon_bottomtab/notification_active.png')
-              : require('./src/image_Khoi/iccon_bottomtab/notification.png')
-                
+              source = focused
+                ? require('./src/image_Khoi/iccon_bottomtab/notification_active.png')
+                : require('./src/image_Khoi/iccon_bottomtab/notification.png')
+
             }
 
             // You can return any component that you like here!
-            return <Image  source={source} />
+            return <Image source={source} />
 
           },
           tabBarShowLabel: false,
@@ -99,10 +116,10 @@ const App = () => {
         <Tab.Screen name="SearchComponent" component={SearchComponent} />
         <Tab.Screen name="Post" component={Post} />
         <Tab.Screen name="Notification" component={Notification} />
-        <Tab.Screen name="Profile" component={Profile} />
+        <Tab.Screen name="ProfileComponent" component={ProfileComponent} />
       </Tab.Navigator>
     );
-    
+
   }
 
   return (
@@ -118,6 +135,8 @@ const App = () => {
         <Stack.Screen name="HomeTab" component={HomeTabs} />
       </Stack.Navigator>
     </NavigationContainer>
+
+
 
   );
 };
