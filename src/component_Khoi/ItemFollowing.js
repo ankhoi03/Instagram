@@ -3,13 +3,12 @@ import React from 'react'
 
 const ItemFollowing = (props) => {
     const { data } = props;
-    console.log(data);
   return (
     <TouchableOpacity
             style={{ flexDirection: 'row', width: '100%', height: 80, justifyContent: 'space-between', alignItems: 'center' }}>
             <View style={{ flexDirection: 'row', alignItems: 'center',height:'100%' }}>
                 <Image source={data.images} style={{ width: 64, height: 64, borderRadius: 99 }} />
-                <View style={{ flexDirection:'row',width:'81.5%',height:'80%', borderBottomWidth: 1,justifyContent:'space-between',alignItems:'center',borderColor:'#00000050' }}>
+                <View style={{ flexDirection:'row',width:'81.5%',height:'80%',justifyContent:'space-between',alignItems:'center' }}>
                     <View style={{ flexDirection: 'column', justifyContent: 'center', marginStart: 15, }}>
                         <View style={{ flexDirection: 'row' }}>
                             <Text style={{ fontWeight: '600', color: '#000000',fontSize:16 }}>{data.username}</Text>

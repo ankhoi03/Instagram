@@ -4,7 +4,7 @@ import React from 'react'
 const MyBookmarkTab = () => {
   return (
     <View style={styles.container}>
-      <Text style={{fontFamily: 'Poppins',fontSize: 16,fontWeight: 'bold',color: '#262626'}}>You haven't saved any post yet</Text>
+      <Text style={{fontFamily: 'Poppins',fontSize: 20,fontWeight:'700',color: '#262626',width:'70%',textAlign:'center'}}>When people tag you in post they'll appear here.</Text>
     </View>
   )
 }

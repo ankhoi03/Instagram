@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View, StatusBar, Image, TouchableOpacity, Dimensions, ScrollView, ToastAndroid } from 'react-native'
-import React, { useRef, useState } from 'react'
+import React, { useState, useEffect,useContext } from 'react'
 
 import MyPostTab from '../component_Khoi/MyPostTab';
 import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
 import MyBookmarkTab from '../component_Khoi/MyBookmarkTab';
 import Modal from "react-native-modal";
+
+import AxiosIntance from '../config/AxiosIntance';
+import { AppContext } from './AppContext';
 
 const Profile = (props) => {
     const { navigation } = props;
@@ -20,11 +23,45 @@ const Profile = (props) => {
     const gotoAllPost = () => {
         navigation.navigate('AllPost');
     }
+
+    const gotoSaved = () => {
+        navigation.navigate('Saved');
+    }
+    const { infoUser, setinfoUser,setisLogin } = useContext(AppContext);
     const [visible, setvisible] = useState(false);
+    const [numPost, setnumPost] = useState(0);
+  
+
+
+
     const inBeta = () => {
         ToastAndroid.show('Tính năng đang phát triển', ToastAndroid.SHORT);
     }
-    const [allpost, setallpost] = useState(true);
+    
+    const logOut = () => {
+        ToastAndroid.show('Logout thành công, See you later!!', ToastAndroid.SHORT);
+        setinfoUser({});
+        setisLogin(false);
+    }
+
+    useEffect(() => {
+        const getNumPost = async () => {
+            const res = await AxiosIntance().get('/post/mypost/' + infoUser._id);
+            if (res.post != []) {
+                setnumPost(res.post.length);
+            }
+        }
+        getNumPost()
+        const unsubscribe = navigation.addListener('focus', () => {
+            getNumPost()
+        
+        });
+        return () => {
+            unsubscribe();
+        };
+    }, [])
+
+
 
     const MyPostRoute = () => (
         <MyPostTab />
@@ -65,7 +102,7 @@ const Profile = (props) => {
         <View style={styles.container}>
             <View style={styles.headerView}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={styles.username}>tmy_dthuong</Text>
+                    <Text style={styles.username}>{infoUser?.username}</Text>
                     <Image style={{ width: 15, height: 15, marginTop: 5 }} source={require('../image_Khoi/official_icon.png')}></Image>
                 </View>
 
@@ -75,23 +112,23 @@ const Profile = (props) => {
             </View>
             <View >
                 <View style={styles.profileView}>
-                    <Image style={styles.imgProfile} source={require("../image_Khoi/myx1.jpg")}></Image>
+                    <Image style={styles.imgProfile} source={{ uri: infoUser?.image}}></Image>
                     <TouchableOpacity style={styles.imformationView} onPress={gotoAllPost}>
-                        <Text style={styles.nummberText}>20</Text>
+                        <Text style={styles.nummberText}>{numPost}</Text>
                         <Text style={styles.ttText}>Posts</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.imformationView} onPress={gotoFollower}>
-                        <Text style={styles.nummberText}>2.1M</Text>
+                        <Text style={styles.nummberText}>{infoUser?.followers.length}</Text>
                         <Text style={styles.ttText}>Followers</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.imformationView} onPress={gotoFollowing}>
-                        <Text style={styles.nummberText}>1</Text>
+                        <Text style={styles.nummberText}>{infoUser?.following.length}</Text>
                         <Text style={styles.ttText}>Following</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ backgroundColor: '#fff' }}>
-                    <Text style={styles.name}>Mỹ Nguyễn</Text>
-                    <Text numberOfLines={2} style={styles.gtText}>Mot bong hong xinh tuoi tham</Text>
+                    <Text style={styles.name}>{infoUser?.name}</Text>
+                    <Text numberOfLines={2} style={styles.bioText}>{infoUser?.bio}</Text>
                     <TouchableOpacity style={styles.btnEdit} onPress={gotoEditProfile}>
                         <Text style={styles.editprofileText}>Edit Profile</Text>
                     </TouchableOpacity>
@@ -124,15 +161,15 @@ const Profile = (props) => {
                             <Image source={require('../image_Khoi/icon_bottomsheet/settings.png')} />
                             <Text style={styles.optionText} >Setting</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={inBeta} style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
-                            <Image source={require('../image_Khoi/icon_bottomsheet/your_active.png')} />
-                            <Text style={styles.optionText} >Your activity</Text>
+                        <TouchableOpacity onPress={gotoSaved} style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
+                            <Image source={require('../image_Khoi/Saved.png')} />
+                            <Text style={styles.optionText} >Saved</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
+                        <TouchableOpacity onPress={inBeta} style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
                             <Image source={require('../image_Khoi/icon_bottomsheet/change_password.png')} />
                             <Text style={styles.optionText} >Change Password</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
+                        <TouchableOpacity style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }} onPress={logOut}>
                             <Image source={require('../image_Khoi/icon_bottomsheet/logout.png')} />
                             <Text style={styles.optionText} >Log out</Text>
                         </TouchableOpacity>
@@ -220,7 +257,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginStart: 20
     },
-    gtText: {
+    bioText: {
         fontFamily: 'Poppins',
         fontSize: 16,
         fontWeight: '400',
@@ -237,7 +274,7 @@ const styles = StyleSheet.create({
         borderColor: '#0000005A',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom:15
+        marginBottom: 15
 
     },
     editprofileText: {

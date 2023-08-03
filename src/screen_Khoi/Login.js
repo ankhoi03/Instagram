@@ -1,5 +1,9 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image, StatusBar, TextInput,KeyboardAvoidingView, Dimensions } from 'react-native'
-import React,{useState} from 'react'
+import { StyleSheet, Text, TouchableOpacity, View, Image, StatusBar, TextInput, KeyboardAvoidingView, Dimensions, ToastAndroid } from 'react-native'
+import React, { useState,useContext } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AxiosIntance from '../config/AxiosIntance';
+import { AppContext } from './AppContext';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const Login = (props) => {
     const { navigation } = props;
@@ -8,17 +12,32 @@ const Login = (props) => {
     }
     const goToSignUp = () => {
         navigation.navigate('SignUp');
-      }
-      const goToHome = () => {
-        navigation.navigate('HomeTab');
-      }
+    }
 
-     const [username, setusername] = useState('tmy_dthuong') 
-     const [password, setpassword] = useState('ntmy2003');
+    const {setisLogin}= useContext(AppContext);
+    const {setinfoUser}= useContext(AppContext);
+    const [username, setusername] = useState('')
+    const [password, setpassword] = useState('');
+    const goToHome = async () => {
+        let data = { username, password}
+        try {
+            const res = await AxiosIntance().post('user/login', data);
+            if (res.result == true) {
+                await AsyncStorage.setItem('token',res.token);
+                ToastAndroid.show('Đăng nhập thành công!', ToastAndroid.SHORT);
+                setinfoUser(res.user);
+                setisLogin(true);
+            }else {
+                ToastAndroid.show('Đăng nhập thất bại!!', ToastAndroid.SHORT);
+            }
+           
+        } catch {
+
+        }
+    }
     return (
-
-        <View style={styles.container}>
-            <View style={{ flex:1 }}>
+        <KeyboardAwareScrollView style={styles.container}>
+            <View style={{ flex: 1 }}>
                 <TouchableOpacity onPress={goBack}>
                     <Image style={styles.btnBack} source={require('../image_Khoi/Back.png')}></Image>
                 </TouchableOpacity>
@@ -44,13 +63,7 @@ const Login = (props) => {
                 </View>
 
             </View>
-            <View style={styles.bottomView}>
-                <Text style={styles.noAccText}>Instagram dev by Khoi</Text>
-            </View>
-        </View>
-
-
-       
+        </KeyboardAwareScrollView>
     )
 }
 
@@ -59,12 +72,12 @@ export default Login
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#FFFFFF',
-        flex:1
+        flex: 1
     },
     btnBack: {
         marginTop: 16,
         marginStart: 16,
-        
+
     },
     logo: {
         alignSelf: 'center',
@@ -79,7 +92,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FAFAFA',
         borderWidth: 1,
         borderColor: '#0000001A',
-        color:'#676060'
+        color: '#676060'
     },
     btnForgotPass: {
         marginTop: 19,
@@ -112,8 +125,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignSelf: 'center',
         marginTop: 30,
-        justifyContent:'center',
-        alignItems:'center'
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     fbText: {
         fontFamily: 'Poppins',
@@ -147,16 +160,5 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '700',
         color: '#3797EF',
-    },
-    bottomView: {
-        backgroundColor: '#00000005',
-        height: 84,
-        borderTopWidth: 1,
-        borderColor: '#00000010',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
-        
-    },
- 
+    }
 })

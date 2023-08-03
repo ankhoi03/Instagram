@@ -37,6 +37,9 @@ import ItemImageProfile from './src/component_Khoi/ItemImageProfile'
 import AllPost from './src/screen_Khoi/AllPost'
 import Follower from './src/screen_Khoi/Follower'
 import Following from './src/screen_Khoi/Following'
+import Comment from './src/screen_Khoi/Comment'
+import AppNavigator from './src/screen_Khoi/AppNavigator'
+import { AppContextProvider } from './src/screen_Khoi/AppContext'
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -65,6 +68,15 @@ const App = () => {
     )
   }
 
+  function HomeComponent() {
+    return (
+      <Stack.Navigator initialRouteName='Home' screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Comment" component={Comment} />
+      </Stack.Navigator>
+    )
+  }
+
 
 
 
@@ -76,7 +88,7 @@ const App = () => {
           tabBarIcon: ({ focused }) => {
             let source;
 
-            if (route.name === 'Home') {
+            if (route.name === 'HomeComponent') {
               source = focused
                 ? require('./src/image_Khoi/iccon_bottomtab/home_active.png')
                 : require('./src/image_Khoi/iccon_bottomtab/home.png')
@@ -112,7 +124,7 @@ const App = () => {
 
         })}
       >
-        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="HomeComponent" component={HomeComponent} />
         <Tab.Screen name="SearchComponent" component={SearchComponent} />
         <Tab.Screen name="Post" component={Post} />
         <Tab.Screen name="Notification" component={Notification} />
@@ -126,15 +138,21 @@ const App = () => {
 
 
 
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName='Welcome' screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Welcome" component={Welcome} />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="EditProfile" component={EditProfile} />
-        <Stack.Screen name="HomeTab" component={HomeTabs} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    // <NavigationContainer>
+    //   <Stack.Navigator initialRouteName='Welcome' screenOptions={{ headerShown: false }}>
+    //     <Stack.Screen name="Welcome" component={Welcome} />
+    //     <Stack.Screen name="Login" component={Login} />
+    //     <Stack.Screen name="SignUp" component={SignUp} />
+    //     <Stack.Screen name="EditProfile" component={EditProfile} />
+    //     <Stack.Screen name="HomeTab" component={HomeTabs} />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
+
+    <AppContextProvider>
+      <NavigationContainer>
+        <AppNavigator/>
+      </NavigationContainer>
+    </AppContextProvider>
 
 
 

@@ -4,7 +4,8 @@ import ItemPost from '../component_Khoi/ItemPost';
 import AxiosIntance from '../config/AxiosIntance';
 import { AppContext } from '../screen_Khoi/AppContext';
 
-const AllPost = (props) => {
+
+const Saved = (props) => {
   const { navigation } = props;
   const goBack = () => {
     navigation.goBack();
@@ -14,9 +15,10 @@ const AllPost = (props) => {
   const { infoUser } = useContext(AppContext);
   useEffect(() => {
     const getPost = async () => {
-      const res = await AxiosIntance().get('/post/mypost/'+infoUser._id);
-      if (res.post != []) {
-        const reversedData = res.post.reverse();
+      const res = await AxiosIntance().get('/post/savedpost/'+infoUser._id);
+      console.log(res);
+      if (res.result != []) {
+        const reversedData = res.result.reverse();
         setdataLord(reversedData);
         setisLoading(false);
       }
@@ -37,7 +39,7 @@ const AllPost = (props) => {
               <TouchableOpacity onPress={goBack} style={{ width: 20, height: 36, justifyContent: 'center' }}>
                 <Image source={require('../image_Khoi/Back.png')} />
               </TouchableOpacity>
-              <Text style={styles.textAllPost}>All Posts</Text>
+              <Text style={styles.textAllPost}>Saved Posts</Text>
               <View style={{ width: 20, height: 36 }}></View>
             </View>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -51,7 +53,7 @@ const AllPost = (props) => {
               <TouchableOpacity onPress={goBack} style={{ width: 20, height: 36, justifyContent: 'center' }}>
                 <Image source={require('../image_Khoi/Back.png')} />
               </TouchableOpacity>
-              <Text style={styles.textAllPost}>All Posts</Text>
+              <Text style={styles.textAllPost}>Saved Posts</Text>
               <View style={{ width: 20, height: 36 }}></View>
             </View>
             <View style={styles.allpostView}>
@@ -68,7 +70,7 @@ const AllPost = (props) => {
   )
 }
 
-export default AllPost
+export default Saved
 
 const styles = StyleSheet.create({
   container: {

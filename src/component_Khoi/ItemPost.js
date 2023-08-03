@@ -1,15 +1,85 @@
 import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity, ToastAndroid } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 
 import Modal from "react-native-modal"
+import { useNavigation } from '@react-navigation/native';
+import ImagePlaceholder from 'react-native-image-placeholder';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import AxiosIntance from '../config/AxiosIntance';
+import { AppContext } from '../screen_Khoi/AppContext';
 
 const ItemPost = (props) => {
-    const { data } = props;
+    const { data, onDelete, onHide } = props;
+    const navigation = useNavigation();
+    const gotoComment = () => {
+        navigation.navigate('Comment', { postid: data?._id });
+    }
+    const gotoEditPost = () => {
+        navigation.navigate('EditPost', { post: data });
+    }
     const [isLike, setisLike] = useState(false);
     const [isSaved, setisSaved] = useState(false);
-    const [numsofLike, setnumsofLike] = useState(201102);
-
+    const [numsofLike, setnumsofLike] = useState(0);
     const [visible, setvisible] = useState(false);
+    const [user, setuser] = useState('');
+    const { infoUser, setinfoUser } = useContext(AppContext);
+    (async () => {
+        try {
+            const value = await AsyncStorage.getItem('userid');
+            if (value !== null) {
+                setuser(value);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    })();
+
+
+    useEffect(() => {
+        const checkLike = async () => {
+            setisLike(data.likes.includes(infoUser._id));
+            setnumsofLike(data.likes.length);
+        }
+        const checkSave = async () => {
+            setisSaved(data.saves.includes(infoUser._id));
+        }
+        checkLike();
+        checkSave();
+        return () => {
+        }
+    }, [])
+
+    const handleLike = async (postid) => {
+        const userid = infoUser._id;
+        const res = await AxiosIntance().post('/post/like', { userid, postid });
+        if (res.result == true) {
+            setnumsofLike(numsofLike + 1)
+            setisLike(true)
+        }
+    };
+    const handleUnLike = async (postid) => {
+        const userid = infoUser._id;
+        const res = await AxiosIntance().post('/post/unlike', { userid, postid });
+        if (res.result == true) {
+            setnumsofLike(numsofLike - 1)
+            setisLike(false)
+        }
+    };
+
+    const handleSave = async (postid) => {
+        const userid = infoUser._id;
+        const res = await AxiosIntance().post('/post/save', { userid, postid });
+        if (res.result == true) {
+            setisSaved(true);
+        }
+    };
+    const handleUnSave = async (postid) => {
+        const userid = infoUser._id;
+        const res = await AxiosIntance().post('/post/unsave', { userid, postid });
+        if (res.result == true) {
+            setisSaved(false);
+        }
+    };
 
     const inBeta = () => {
         ToastAndroid.show('Tính năng đang phát triển', ToastAndroid.SHORT);
@@ -18,44 +88,44 @@ const ItemPost = (props) => {
         <View style={styles.container}>
             <View style={styles.headerView}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Image style={styles.imgProfile} source={require('../image_Khoi/myx1.jpg')} />
+                    <Image style={styles.imgProfile} source={{ uri: data?.userid.image }} />
                     <View>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Text style={styles.usernamePost}>tmy_dthuong</Text>
+                            <Text style={styles.usernamePost}>{data?.userid.username}</Text>
                             <Image Image style={{ width: 10, height: 10, marginTop: 3 }} source={require('../image_Khoi/official_icon.png')} />
                         </View>
-                        <Text style={styles.placeText}>Seoul, Korea</Text>
+                        <Text style={styles.placeText}>FPT Polytechnic</Text>
                     </View>
                 </View>
-                <TouchableOpacity onPress={() => setvisible(true)} style={{ height: 24, justifyContent: 'center' }}>
+                <TouchableOpacity onPress={() => setvisible(true)} style={{ width: 24, height: 36, justifyContent: 'center', alignItems: 'flex-end' }}>
                     <Image source={require('../image_Khoi/More.png')} />
                 </TouchableOpacity>
             </View>
-            <Image style={styles.imgPost} source={data?.images} />
+            <ImagePlaceholder placeholderStyle={styles.placeholder} style={styles.imgPost} source={{ uri: data?.image }} />
             <View style={styles.actionView}>
                 <View style={{ flexDirection: 'row', width: 75, justifyContent: 'space-between', paddingHorizontal: 4 }}>
                     {
                         isLike ?
-                            <TouchableOpacity onPress={() => { setisLike(false), setnumsofLike(numsofLike - 1) }}>
+                            <TouchableOpacity onPress={() => handleUnLike(data._id)}>
                                 <Image style={styles.likeIcon} source={require('../image_Khoi/Like.png')} />
                             </TouchableOpacity>
                             :
-                            <TouchableOpacity onPress={() => { setisLike(true), setnumsofLike(numsofLike + 1) }}>
+                            <TouchableOpacity onPress={() => handleLike(data._id)}>
                                 <Image source={require('../image_Khoi/nonLike.png')} />
                             </TouchableOpacity>
                     }
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={gotoComment}>
                         <Image source={require('../image_Khoi/Comment.png')} />
                     </TouchableOpacity>
 
                 </View>
                 {
                     isSaved ?
-                        <TouchableOpacity onPress={() => setisSaved(false)}>
+                        <TouchableOpacity onPress={() => handleUnSave(data._id)}>
                             <Image style={styles.likeIcon} source={require('../image_Khoi/Saved.png')} />
                         </TouchableOpacity>
                         :
-                        <TouchableOpacity onPress={() => setisSaved(true)}>
+                        <TouchableOpacity onPress={() => handleSave(data._id)}>
                             <Image source={require('../image_Khoi/nonSave.png')} />
                         </TouchableOpacity>
                 }
@@ -63,8 +133,8 @@ const ItemPost = (props) => {
             <View style={styles.bottomView}>
                 <Text style={styles.numsofLikeText}>{numsofLike} likes</Text>
                 <View style={{ flexDirection: 'row' }}>
-                    <Text style={styles.usernamePost}>tmy_dthuong
-                        <Text style={styles.statusText}> Tớ và biển.</Text>
+                    <Text style={styles.usernamePost}>{data?.userid.username}
+                        <Text style={styles.statusText}>{" " + data?.content}</Text>
                     </Text>
 
                 </View>
@@ -77,49 +147,37 @@ const ItemPost = (props) => {
                 onBackButtonPress={() => setvisible(false)}
             >
                 <View style={styles.optionView}>
-                    <View style={{ paddingVertical: 20 }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', alignSelf: 'flex-start', marginStart: 16 }}>
-                            <Text style={styles.username}>tmy_dthuong</Text>
-                            <Image style={{ width: 15, height: 15, marginTop: 5 }} source={require('../image_Khoi/official_icon.png')}></Image>
-                        </View>
-                        <View style={styles.profileView}>
-                            <Image style={styles.imgPro5} source={require("../image_Khoi/myx1.jpg")}></Image>
-                            <TouchableOpacity style={styles.imformationView}>
-                                <Text style={styles.nummberText}>20</Text>
-                                <Text style={styles.ttText}>Posts</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.imformationView}>
-                                <Text style={styles.nummberText}>2.1M</Text>
-                                <Text style={styles.ttText}>Followers</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.imformationView}>
-                                <Text style={styles.nummberText}>1</Text>
-                                <Text style={styles.ttText}>Following</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <Text style={styles.name}>Mỹ Nguyễn</Text>
-                        <Text numberOfLines={2} style={styles.gtText}>Mot bong hong xinh tuoi tham</Text>
-                        <TouchableOpacity style={styles.btnEdit}>
-                            <Text style={styles.editprofileText}>Unfollow</Text>
-                        </TouchableOpacity>
+
+                    <>
+                        {
+                            infoUser._id == data?.userid._id
+                                ?
+                                <View style={styles.btmView}>
+                                    <TouchableOpacity onPress={onDelete} onPressOut={() => setvisible(false)} style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
+                                        <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/delete.png')} />
+                                        <Text style={styles.optionText} >Delete this post</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={gotoEditPost} style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
+                                        <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/draw.png')} />
+                                        <Text style={[styles.optionText]} >Edit post</Text>
+                                    </TouchableOpacity>
+
+                                </View>
+                                :
+                                <View style={styles.btmView}>
+                                    <TouchableOpacity onPress={onHide} style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
+                                        <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/hide.png')} />
+                                        <Text style={styles.optionText} >Hidden this post</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity onPress={inBeta} style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
+                                        <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/post_report.png')} />
+                                        <Text style={[styles.optionText, { color: 'red' }]} >Report this post</Text>
+                                    </TouchableOpacity>
+                                </View>
+                        }
+                    </>
 
 
-                    </View>
-                    <View style={styles.btmView}>
-
-                        <TouchableOpacity onPress={inBeta} style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
-                            <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/hide.png')} />
-                            <Text style={styles.optionText} >Hidden this post</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={inBeta} style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
-                            <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/post_report.png')} />
-                            <Text style={[styles.optionText,{color:'red'}]} >Report this post</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{ flexDirection: 'row', height: 48, width: '100%', alignItems: 'center' }}>
-                            <Image style={styles.btsImg} source={require('../image_Khoi/icon_bottomsheet/user_report.png')} />
-                            <Text style={[styles.optionText,{color:'red'}]} >Report account</Text>
-                        </TouchableOpacity>
-                    </View>
 
                 </View>
 
@@ -157,7 +215,7 @@ const styles = StyleSheet.create({
     },
     usernamePost: {
         fontFamily: 'Poppins',
-        fontSize: 14,
+        fontSize: 15,
         fontWeight: 'bold',
         color: '#262626',
         marginEnd: 2
@@ -171,6 +229,11 @@ const styles = StyleSheet.create({
     imgPost: {
         width: maxWidth,
         height: maxWidth
+    },
+    placeholder: {
+        width: maxWidth,
+        height: maxWidth,
+        backgroundColor: '#ccc',
     },
     actionView: {
         height: 44,
@@ -207,21 +270,20 @@ const styles = StyleSheet.create({
         marginStart: 10,
     },
     btmView: {
-        borderTopWidth: 1,
-        borderColor: '#00000060',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingHorizontal:20,
-        paddingVertical:10
+        paddingHorizontal: 20,
+        paddingVertical: 10
     },
     optionView: {
         position: 'absolute',
         bottom: -20,
         right: 0,
         left: 0,
-        height: 455,
+        height: 120,
         width: '100%',
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        justifyContent: 'center'
 
     },
     btsImg: {

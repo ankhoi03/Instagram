@@ -3,7 +3,7 @@ import React from 'react'
 
 const ItemNotification = (props) => {
     const { data } = props;
-    console.log(data);
+  
     const textWidth = Dimensions.get('window').width - 174;
 
     return (

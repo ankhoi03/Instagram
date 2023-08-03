@@ -14,7 +14,7 @@ const ItemImageProfile = (props) => {
               alignItems: 'center',
             }}>
             <Image
-              source={data.images}
+              source={{ uri: data?.image }}
               style={{width: itemWidth - 1.5, height: itemWidth - 1.5}}
             />
           </TouchableOpacity>

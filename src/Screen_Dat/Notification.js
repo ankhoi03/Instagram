@@ -13,12 +13,13 @@ const Notification = () => {
             <View style={styles.header}>
                 <Text style={{ fontSize: 18, fontWeight: '900', color: '#000000' }}>Notifications</Text>
             </View>
-            <View style={{ flex:1 ,backgroundColor:'#fff'}}>
-                <FlatList
+            <View style={{ flex:1 ,backgroundColor:'#fff',alignItems:'center',justifyContent:'center'}}>
+                {/* <FlatList
                     data={data}
                     renderItem={({ item }) => <ItemNotification data={item} />}
                     keyExtractor={item => item.id}
-                />
+                /> */}
+                <Text style={{fontFamily: 'Poppins',fontSize: 24,fontWeight:'700',color: '#262626',width:'75%',textAlign:'center'}}>We are trying to dev comming soon...</Text>
             </View>
         </View>
     )
@@ -40,96 +41,6 @@ const data = [
     images: require('../image_Khoi/myx1.jpg'),
     username: 'tmy_dthuong',
     title:'Mot bong hong xinh tuoi tham',
-  },
-  {
-    id: '2',
-    images: require('../image_Khoi/myx2.jpg'),
-    username: 'tmy_dthuong',
-    title:'Mot bong hong xinh tuoi tham',
-  },
-  {
-    id: '13',
-    images: require('../image_Khoi/myx13.jpg'),
-    username: 'tmy_dthuong',
-    title:'Mot bong hong xinh tuoi tham',
-  },
-  {
-    id: '3',
-    images: require('../image_Khoi/myx3.jpg'),
-    username: 'tmy_dthuong',
-    title:'Mot bong hong xinh tuoi tham',
-  },
-  {
-    id: '4',
-    images: require('../image_Khoi/myx4.jpg'),
-    username: 'tmy_dthuong',
-    title:'Mot bong hong xinh tuoi tham',
-  },
-  {
-    id: '14',
-    images: require('../image_Khoi/myx14.jpg'),
-    username: 'tmy_dthuong',
-    title:'Mot bong hong xinh tuoi tham',
-  },
-  {
-    id: '5',
-    images: require('../image_Khoi/myx5.jpg'),
-    username: 'tmy_dthuong',
-    title:'Mot bong hong xinh tuoi tham',
-  },
-  {
-    id: '15',
-    images: require('../image_Khoi/myx15.jpg'),
-    username: 'tmy_dthuong',
-    title:'Mot bong hong xinh tuoi tham',
-  },
-  {
-    id: '6',
-    images: require('../image_Khoi/myx6.jpg'),
-    username: 'tmy_dthuong',
-    title:'Mot bong hong xinh tuoi tham',
-  },
-  {
-    id: '7',
-    images: require('../image_Khoi/myx7.jpg'),
-    username: 'tmy_dthuong',
-    title:'Mot bong hong xinh tuoi tham',
-  },
-  {
-    id: '16',
-    images: require('../image_Khoi/myx15.jpg'),
-    username: 'tmy_dthuong',
-    title:'Mot bong hong xinh tuoi tham',
-  },
-  {
-    id: '8',
-    images: require('../image_Khoi/myx8.jpg'),
-    username: 'tmy_dthuong',
-    title:'Mot bong hong xinh tuoi tham',
-  },
-  {
-    id: '9',
-    images: require('../image_Khoi/myx9.jpg'),
-    username: 'tmy_dthuong',
-    title:'Mot bong hong xinh tuoi tham',
-  },
-  {
-    id: '10',
-    images: require('../image_Khoi/myx10.jpg'),
-    username: 'tmy_dthuong',
-    title:'Mot bong hong xinh tuoi tham',
-  },
-  {
-    id: '11',
-    images: require('../image_Khoi/myx11.jpg'),
-    username: 'tmy_dthuong',
-    title:'Mot bong hong xinh tuoi tham',
-  },
-  {
-    id: '12',
-    images: require('../image_Khoi/myx12.jpg'),
-    username: 'tmy_dthuong',
-    title:'Mot bong hong xinh tuoi tham',
-  },
+  }
 
 ];

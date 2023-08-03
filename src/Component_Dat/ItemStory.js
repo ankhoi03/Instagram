@@ -9,7 +9,7 @@ const ItemStory = (props) => {
         <View style={styles.container}>
             <View style={{flexDirection:'column'}}>
                 <Image style={{ width: 62, height: 62, borderRadius: 99 }}
-                    source={require('../Image_Dat/story1.png')} />
+                    source={require('../image_Khoi/myx1.jpg')} />
                 <Text style={{ fontSize: 12, fontWeight:'400'}}>Your Story</Text>
             </View>
 

@@ -1,40 +1,79 @@
-import { StyleSheet, Text, View, Image, StatusBar, TextInput,TouchableOpacity } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, Image, StatusBar, TextInput, TouchableOpacity, ToastAndroid } from 'react-native'
+import React, { useState } from 'react'
+import AxiosIntance from '../config/AxiosIntance';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 const SignUp = (props) => {
     const { navigation } = props;
     const goBack = () => {
         navigation.goBack();
     }
-    const goToLogin = () => {
+    const [email, setemail] = useState('');
+    const [username, setusername] = useState('');
+    const [name, setname] = useState('');
+    const [password, setpassword] = useState('');
+    const [confirm_password, setconfirm_password] = useState('');
+    const backLogin = () => {
         navigation.navigate('Login');
-      }
-  return (
-    <View style={styles.container}>
-            <View style={{ flex: 1 }}>
-                <TouchableOpacity onPress={goBack}>
-                    <Image style={styles.btnBack} source={require('../image_Khoi/Back.png')}></Image>
-                </TouchableOpacity>
+    }
+    const goToLogin = async () => {
+        const isEmail = email=='';
+        const isUsername = username.length =='';
+        const isPass = password.length =='';
+        if (isEmail) {
+            ToastAndroid.show("Hãy nhập Email!!", ToastAndroid.SHORT);
+        } else
+            if (isUsername) {
+                ToastAndroid.show("Hãy nhập Username!!", ToastAndroid.SHORT);
+            } else
+                if (isPass) {
+                    ToastAndroid.show("Hãy nhập Passowrd", ToastAndroid.SHORT);
+                } else
+                    if (password != confirm_password) {
+                        ToastAndroid.show("Mật khẩu không khớp!!", ToastAndroid.SHORT);
+                    }
+                    else {
+                        let data = { email, username, name, password, confirm_password }
+                        const res = await AxiosIntance().post('user/register', data);
+                        console.log(res);
+                        if (res.result == true) {
+                            ToastAndroid.show("Đăng ký thành công!!", ToastAndroid.SHORT);
+                            setTimeout(function () {
+                                navigation.navigate('Login');
+                            }, 2000);
+                        } else {
+                            ToastAndroid.show("Đăng ký thất bại!!", ToastAndroid.SHORT);
+                        }
+
+                    }
+    }
+    return (
+        <View style={styles.container}>
+            <TouchableOpacity onPress={goBack}>
+                <Image style={styles.btnBack} source={require('../image_Khoi/Back.png')}></Image>
+            </TouchableOpacity>
+            <KeyboardAwareScrollView extraHeight={200} enableOnAndroid style={{ flex: 1, backgroundColor: '#fff' }}>
+
                 <Image style={styles.logo} source={require('../image_Khoi/Instagram_Logo.png')}></Image>
-                <TextInput style={styles.textInput} placeholder='Username' placeholderTextColor={'#67606070'}></TextInput>
-                <TextInput secureTextEntry={true} style={[styles.textInput, { marginTop: 12 }]} placeholder='Password' placeholderTextColor={'#67606070'}></TextInput>
-                <TextInput secureTextEntry={true} style={[styles.textInput, { marginTop: 12 }]} placeholder='Confirm Password' placeholderTextColor={'#67606070'}></TextInput>
-                <TouchableOpacity style={styles.btnLogin}>
+                <TextInput onChangeText={setemail} style={styles.textInput} placeholder='Email' placeholderTextColor={'#67606070'}></TextInput>
+                <TextInput onChangeText={setusername} style={[styles.textInput, { marginTop: 12 }]} placeholder='Username' placeholderTextColor={'#67606070'}></TextInput>
+                <TextInput onChangeText={setname} style={[styles.textInput, { marginTop: 12 }]} placeholder='Name' placeholderTextColor={'#67606070'}></TextInput>
+                <TextInput onChangeText={setpassword} secureTextEntry={true} style={[styles.textInput, { marginTop: 12 }]} placeholder='Password' placeholderTextColor={'#67606070'}></TextInput>
+                <TextInput onChangeText={setconfirm_password} secureTextEntry={true} style={[styles.textInput, { marginTop: 12 }]} placeholder='Confirm Password' placeholderTextColor={'#67606070'}></TextInput>
+                <TouchableOpacity style={styles.btnLogin} onPress={goToLogin}>
                     <Text style={styles.loginText}>Sign Up</Text>
                 </TouchableOpacity>
                 <View style={styles.orSignUpView}>
                     <Text style={styles.noAccText}>You have an account?</Text>
-                    <TouchableOpacity style={{ marginStart: 5 }} onPress={goToLogin}>
-                        <Text style={styles.signUpText}>Sign In</Text>
+                    <TouchableOpacity style={{ marginStart: 5 }} onPress={backLogin}>
+                        <Text style={styles.signUpText}>Login</Text>
                     </TouchableOpacity>
                 </View>
 
-            </View>
-            <View style={styles.bottomView}>
-                <Text style={styles.noAccText}>Instagram dev by Khoi</Text>
-            </View>
+            </KeyboardAwareScrollView>
         </View>
-  )
+    )
 }
 
 export default SignUp
@@ -50,7 +89,7 @@ const styles = StyleSheet.create({
     },
     logo: {
         alignSelf: 'center',
-        marginTop: 80
+        marginTop: 50
     },
     textInput: {
         marginHorizontal: 16,
@@ -61,7 +100,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FAFAFA',
         borderWidth: 1,
         borderColor: '#0000001A',
-        color:'#676060'
+        color: '#676060'
     },
     btnLogin: {
         width: 343,
@@ -97,14 +136,5 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '700',
         color: '#3797EF',
-    },
-    bottomView: {
-        backgroundColor: '#00000005',
-        height: 84,
-        borderTopWidth: 1,
-        borderColor: '#00000010',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row'
-    },
+    }
 })

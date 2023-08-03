@@ -19,7 +19,9 @@ import { AppContext } from '../screen_Khoi/AppContext';
 import ImageResizer from 'react-native-image-resizer';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-const Post = () => {
+const EditPost = (props) => {
+    const { route } = props;
+    const { params } = route;
     const navigation = useNavigation();
     const goToHome = () => {
         navigation.navigate('Home');
@@ -27,8 +29,8 @@ const Post = () => {
     const goBack = () => {
         navigation.goBack();
     }
-    const [linkimg, setlinkimg] = useState(null);
-    const [content, setcontent] = useState("");
+    const [linkimg, setlinkimg] = useState(params.post.image);
+    const [content, setcontent] = useState(params.post.content);
     const { infoUser } = useContext(AppContext);
 
     const clear = () => {
@@ -64,18 +66,12 @@ const Post = () => {
         }
     }
 
-    const upload = async () => {
-        const isContent= content =='';
-        const isImage= linkimg == null;
-        if (isImage) {
-            ToastAndroid.show("Hãy chọn ảnh nào đó!!", ToastAndroid.SHORT);
-            
-        }else if(isContent){
+    const update = async () => {
+        if (content == '' || linkimg == null) {
             ToastAndroid.show("Hãy chia sẻ gì đó!!", ToastAndroid.SHORT);
-        }
-        else {
-            const up = await AxiosIntance().post('/post/add', {
-                useridparam: infoUser._id,
+        } else {
+            const up = await AxiosIntance().post('/post/update', {
+                _id: params.post._id,
                 content: content,
                 image: linkimg
             });
@@ -97,10 +93,10 @@ const Post = () => {
                     <Image source={require('../Image_Dat/Back.png')} />
                 </TouchableOpacity>
 
-                <Text style={Styles.txtSttPost}>New Post</Text>
+                <Text style={Styles.txtSttPost}>Edit Post</Text>
 
-                <TouchableOpacity style={Styles.btnPost} onPress={upload}>
-                    <Text style={Styles.txtPost}>Post</Text>
+                <TouchableOpacity style={Styles.btnPost} onPress={update}>
+                    <Text style={Styles.txtPost}>Update</Text>
                 </TouchableOpacity>
 
             </View>
@@ -113,33 +109,18 @@ const Post = () => {
                     <Image Image style={{ width: 15, height: 15, marginTop: 2, marginStart: 4 }} source={require('../image_Khoi/official_icon.png')} />
                 </View>
 
-                {
-                    linkimg == null
-                        ?
-                        <View style={Styles.Body}>
-                            <TouchableOpacity onPress={pickImg}>
-                                <Image
-                                    style={Styles.imgAdd}
-                                    source={require('../image_Khoi/Add.png')}
-                                />
 
-                            </TouchableOpacity>
-                            <Text style={Styles.txtAdd}>Add Image</Text>
-                        </View>
+                <TouchableOpacity onPress={pickImg}>
+                    <ImagePlaceholder placeholderStyle={Styles.placeholder}
+                        style={Styles.image}
+                        source={{ uri: linkimg }} />
+                </TouchableOpacity>
 
-                        :
-                        <TouchableOpacity onPress={pickImg}>
-                            <ImagePlaceholder placeholderStyle={Styles.placeholder}
-                                style={Styles.image}
-                                source={{ uri: linkimg }} />
-                        </TouchableOpacity>
 
-                }
                 <TextInput
                     style={Styles.NoteStyle}
                     multiline={true}
                     placeholder="What's on your mind?"
-
                     onChangeText={setcontent}
                     value={content}
                 />
@@ -148,7 +129,7 @@ const Post = () => {
     );
 };
 
-export default Post;
+export default EditPost;
 const maxWidth = Dimensions.get('window').width;
 const Styles = StyleSheet.create({
     container: {

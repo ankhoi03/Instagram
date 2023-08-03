@@ -13,7 +13,6 @@ import React from 'react'
 
 const ItemSearch = (props) => {
     const { data } = props;
-    console.log(data);
     const itemWidth = Dimensions.get('window').width / 3;
     return (
         <View style={{ flexDirection: 'row' }}>
@@ -26,7 +25,7 @@ const ItemSearch = (props) => {
                     alignItems: 'center',
                 }}>
                 <Image
-                    source={data.images}
+                    source={{ uri: data?.image }}
                     style={{ width: itemWidth - 1.5, height: itemWidth - 1.5 }}
                 />
             </TouchableOpacity>
